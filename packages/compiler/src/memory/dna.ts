@@ -35,7 +35,8 @@ export interface BrandTokens {
     | 'Ampera Industrial Freight'
     | 'Artify AI Obsidian'
     | 'Botanical Margarita Editorial'
-    | 'Travelish Sanctuary Minimal';
+    | 'Travelish Sanctuary Minimal'
+    | 'DesignJoy Subscription';
   colors: {
     background: string;
     foreground: string;
@@ -89,6 +90,48 @@ export class BrandDNAEngine {
 
   private synthesizeRaw(archetype: BrandTokens['archetype']): BrandTokens {
     switch (archetype) {
+      case 'DesignJoy Subscription':
+        return {
+          archetype: 'DesignJoy Subscription',
+          colors: {
+            background: '#080808', // Pure dark obsidian canvas
+            foreground: '#ffffff', // Crisp white headers
+            card: '#131315',       // Dark elevation surface
+            cardForeground: '#ffffff',
+            primary: '#e2ff00',    // Electric neon lime/yellow CTA
+            primaryForeground: '#080808',
+            secondary: '#1a1a1e',  // Subtle card highlight
+            accent: '#10b981',     // Emerald green badge accent
+            border: 'rgba(255, 255, 255, 0.12)',
+            ring: 'rgba(226, 255, 0, 0.5)',
+            gradientHero: 'linear-gradient(180deg, #080808 0%, #131315 100%)',
+          },
+          typography: {
+            fontFamilyHeading: 'Figtree, Plus Jakarta Sans, Inter, ui-sans-serif, sans-serif',
+            fontFamilyBody: 'Figtree, Inter, ui-sans-serif, sans-serif',
+            fontSizeHero: '88px',
+            fontSizeH1: '64px',
+            fontSizeH2: '44px',
+            fontSizeBody: '17px',
+            lineHeightHero: '0.98',
+          },
+          radius: {
+            sm: '10px',
+            md: '20px',
+            lg: '32px',
+            full: '9999px',
+          },
+          shadows: {
+            card: '0 20px 40px rgba(0, 0, 0, 0.5)',
+            glow: '0 0 50px -5px rgba(226, 255, 0, 0.35)',
+          },
+          motion: {
+            ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
+            durationFast: '150ms',
+            durationNormal: '300ms',
+          },
+        };
+
       case 'Philippe Starck Constructivist':
         return {
           archetype: 'Philippe Starck Constructivist',

@@ -64,12 +64,18 @@ export default function UIOSStudioDashboard() {
             </div>
           </div>
 
-          <div className="flex items-center gap-4 text-xs font-mono text-gray-400">
+          <div className="flex items-center gap-3 text-xs font-mono text-gray-400">
+            <Link
+              href="/real-estate-designjoy"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#e2ff00] text-[#080808] font-bold hover:bg-[#cbe600] transition-all shadow-md"
+            >
+              <Sparkles className="w-3.5 h-3.5" /> DesignJoy Real Estate →
+            </Link>
             <Link
               href="/real-estate-saas"
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#3a8088] to-[#3b82f6] text-white font-medium hover:opacity-90 transition-all shadow-md"
             >
-              <Building2 className="w-3.5 h-3.5" /> Launch Real Estate SaaS Demo →
+              <Building2 className="w-3.5 h-3.5" /> Real Estate SaaS →
             </Link>
             <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10">
               <Zap className="w-3.5 h-3.5 text-amber-400" /> React 19 RSC & Edge Compiler
