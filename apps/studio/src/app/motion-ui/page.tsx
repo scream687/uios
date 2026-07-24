@@ -1,14 +1,17 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
 import { Sparkles, Play, Layers, Compass, ArrowRight, ShieldCheck, Zap, Command, RefreshCw, Eye, Move } from 'lucide-react';
 
 export default function MotionUIComponentsPage() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: containerRef });
-  
-  // Smooth scroll progress spring
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const { scrollYProgress } = useScroll();
   const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
   // Transforms for scroll-driven animations
@@ -18,12 +21,11 @@ export default function MotionUIComponentsPage() {
   
   const componentY1 = useTransform(smoothProgress, [0.15, 0.4], [100, 0]);
   const componentOpacity1 = useTransform(smoothProgress, [0.15, 0.35], [0, 1]);
-  
+
   const cardRotateY = useTransform(smoothProgress, [0.3, 0.6], [-20, 20]);
   const cardScale = useTransform(smoothProgress, [0.35, 0.55], [0.9, 1.05]);
 
   // Interactive Component States
-  const [activeTab, setActiveTab] = useState<'buttons' | 'cards' | 'inputs' | 'telemetry'>('buttons');
   const [isCommandOpen, setIsCommandOpen] = useState<boolean>(false);
   const [buttonState, setButtonState] = useState<'idle' | 'loading' | 'success'>('idle');
 
@@ -36,12 +38,14 @@ export default function MotionUIComponentsPage() {
   };
 
   return (
-    <div ref={containerRef} className="min-h-[400vh] bg-[#060709] text-[#f0f2f5] font-sans antialiased selection:bg-[#5e6ad2] selection:text-white relative">
+    <div className="min-h-[400vh] bg-[#060709] text-[#f0f2f5] font-sans antialiased selection:bg-[#5e6ad2] selection:text-white relative">
       {/* Scroll Progress Bar Header */}
-      <motion.div
-        style={{ scaleX: smoothProgress }}
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#5e6ad2] via-[#8a99ff] to-[#ff3b00] origin-left z-50 shadow-[0_0_15px_#5e6ad2]"
-      />
+      {mounted && (
+        <motion.div
+          style={{ scaleX: smoothProgress }}
+          className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#5e6ad2] via-[#8a99ff] to-[#ff3b00] origin-left z-50 shadow-[0_0_15px_#5e6ad2]"
+        />
+      )}
 
       {/* Floating Header */}
       <header className="fixed top-4 left-1/2 -translate-x-1/2 z-40 bg-[#0f1115]/80 backdrop-blur-2xl border border-white/10 px-8 py-4 rounded-full flex items-center space-x-8 shadow-2xl">
@@ -70,7 +74,7 @@ export default function MotionUIComponentsPage() {
       {/* 1. HERO SCENE: KINETIC SCROLL-TRANSFORMED TITLE */}
       <section className="sticky top-0 h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">
         <motion.div
-          style={{ scale: heroScale, opacity: heroOpacity, rotateX: heroRotateX }}
+          style={mounted ? { scale: heroScale, opacity: heroOpacity, rotateX: heroRotateX } : {}}
           className="max-w-5xl space-y-8 relative z-10"
         >
           <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#5e6ad2]/15 border border-[#5e6ad2]/40 text-[#8a99ff] text-xs font-mono uppercase tracking-widest">
@@ -100,7 +104,7 @@ export default function MotionUIComponentsPage() {
 
       {/* 2. SCROLL SECTION 01: MAGNETIC BUTTONS & INTERACTIVE CONTROLS */}
       <section className="relative z-20 min-h-screen px-8 py-32 max-w-7xl mx-auto flex flex-col justify-center border-t border-white/10">
-        <motion.div style={{ y: componentY1, opacity: componentOpacity1 }} className="space-y-12">
+        <motion.div style={mounted ? { y: componentY1, opacity: componentOpacity1 } : {}} className="space-y-12">
           <div className="space-y-4">
             <span className="text-xs font-mono text-[#5e6ad2] uppercase tracking-[0.3em]">COMPONENT SUITE 01</span>
             <h2 className="text-4xl sm:text-6xl font-black tracking-tight">Kinetic Magnetic Buttons</h2>
@@ -108,7 +112,6 @@ export default function MotionUIComponentsPage() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {/* Magnetic Button 1 */}
             <div className="bg-[#0f1115] border border-white/15 p-8 rounded-3xl space-y-6 flex flex-col justify-between hover:border-[#5e6ad2]/50 transition-all group">
               <div className="space-y-2">
                 <span className="text-xs font-mono text-white/40 uppercase">01 / Magnetic Fluid CTA</span>
@@ -134,7 +137,6 @@ export default function MotionUIComponentsPage() {
               </button>
             </div>
 
-            {/* Magnetic Button 2 */}
             <div className="bg-[#0f1115] border border-white/15 p-8 rounded-3xl space-y-6 flex flex-col justify-between hover:border-[#ff3b00]/50 transition-all group">
               <div className="space-y-2">
                 <span className="text-xs font-mono text-white/40 uppercase">02 / Neon Pulse Accent</span>
@@ -146,7 +148,6 @@ export default function MotionUIComponentsPage() {
               </button>
             </div>
 
-            {/* Magnetic Button 3 */}
             <div className="bg-[#0f1115] border border-white/15 p-8 rounded-3xl space-y-6 flex flex-col justify-between hover:border-white/40 transition-all group">
               <div className="space-y-2">
                 <span className="text-xs font-mono text-white/40 uppercase">03 / Glassmorphic Sub-Action</span>
@@ -170,7 +171,7 @@ export default function MotionUIComponentsPage() {
             <p className="text-white/60 text-lg max-w-xl">Rotational velocity and depth displacement reacting to scroll offset.</p>
           </div>
 
-          <motion.div style={{ rotateY: cardRotateY, scale: cardScale }} className="grid md:grid-cols-2 gap-8 perspective-1000">
+          <motion.div style={mounted ? { rotateY: cardRotateY, scale: cardScale } : {}} className="grid md:grid-cols-2 gap-8 perspective-1000">
             <div className="bg-[#0f1115] border-2 border-[#5e6ad2] p-10 rounded-3xl space-y-6 relative overflow-hidden shadow-[0_0_60px_rgba(94,106,210,0.2)]">
               <div className="flex justify-between items-center text-xs font-mono text-[#8a99ff]">
                 <span>PARALLAX DEPTH: 40px</span>
@@ -232,14 +233,14 @@ export default function MotionUIComponentsPage() {
               <div className="space-y-3 font-mono text-xs">
                 <button
                   onClick={() => setIsCommandOpen(false)}
-                  className="w-full p-4 bg-white/5 hover:bg-[#5e6ad2] hover:text-white rounded-xl text-left transition-all flex justify-between items-center"
+                  className="w-full p-4 bg-white/5 hover:bg-[#5e6ad2] hover:text-[#0f1115] rounded-xl text-left transition-all flex justify-between items-center"
                 >
                   <span>01. Toggle 60FPS Scroll Telemetry</span>
                   <span className="text-white/40 font-normal">Active</span>
                 </button>
                 <button
                   onClick={() => setIsCommandOpen(false)}
-                  className="w-full p-4 bg-white/5 hover:bg-[#5e6ad2] hover:text-white rounded-xl text-left transition-all flex justify-between items-center"
+                  className="w-full p-4 bg-white/5 hover:bg-[#5e6ad2] hover:text-[#0f1115] rounded-xl text-left transition-all flex justify-between items-center"
                 >
                   <span>02. Reset Parallax Physics Springs</span>
                   <span className="text-white/40 font-normal">Ready</span>
