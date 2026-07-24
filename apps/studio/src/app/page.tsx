@@ -66,6 +66,12 @@ export default function UIOSStudioDashboard() {
 
           <div className="flex items-center gap-3 text-xs font-mono text-gray-400">
             <Link
+              href="/estatelink"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#10b981] text-[#090a0c] font-bold hover:bg-[#0ea5e9] hover:text-white transition-all shadow-md"
+            >
+              <Zap className="w-3.5 h-3.5" /> EstateLink Single-Link →
+            </Link>
+            <Link
               href="/real-estate-designjoy"
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#e2ff00] text-[#080808] font-bold hover:bg-[#cbe600] transition-all shadow-md"
             >
