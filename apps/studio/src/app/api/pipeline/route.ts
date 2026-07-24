@@ -13,6 +13,7 @@ import {
   CapabilityKernelEngine,
   DesignDNAManager,
   IntentGraphExtractor,
+  UIOSv10ImpeccableTasteEngine,
 } from '@uios/compiler';
 import { InspirationEngine, DesignKnowledgeGraph, UXLawsEngine } from '@uios/knowledge';
 import { IndependentDesignCritic } from '@uios/critics';
@@ -28,6 +29,10 @@ export async function POST(request: Request) {
     // Layer 1: Design Spec Parser
     const specParser = new DesignSpecParser();
     const spec = specParser.parse(prompt);
+
+    // v10 Impeccable Taste Pro Max Pass
+    const v10TasteEngine = new UIOSv10ImpeccableTasteEngine();
+    const v10TastePass = v10TasteEngine.executeV10ImpeccablePass(prompt, { cardGridCount: 1, uniformSectionDensity: false });
 
     // v9 ADIP Platform Engines
     const intentExtractor = new IntentGraphExtractor();
@@ -109,6 +114,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       spec,
+      v10TastePass,
       intentGraph,
       dna,
       genome,
