@@ -245,14 +245,14 @@ export default function RealEstateSaaSPage() {
                     key={prop.id}
                     className={`${colSpan} bg-[#12151c] border border-white/10 hover:border-[#3a8088]/50 rounded-2xl overflow-hidden group transition-all duration-300 shadow-xl flex flex-col justify-between`}
                   >
-                    <div className="relative h-72 md:h-96 w-full overflow-hidden">
-                      <Image
+                    <div style={{ position: 'relative', width: '100%', height: '320px', overflow: 'hidden' }}>
+                      <img
                         src={prop.image}
                         alt={prop.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                        className="group-hover:scale-105 transition-transform duration-700"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#12151c] via-transparent to-black/40" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#12151c] via-transparent to-black/40 pointer-events-none" />
 
                       <div className="absolute top-4 left-4">
                         <span className="px-3 py-1 rounded-full bg-[#08090a]/80 backdrop-blur-md border border-white/15 text-xs font-mono text-cyan-300 flex items-center gap-1.5">

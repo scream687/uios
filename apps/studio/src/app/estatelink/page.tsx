@@ -181,9 +181,9 @@ export default function EstateLinkPage() {
                 </p>
               </div>
 
-              <div className="relative h-64 rounded-2xl overflow-hidden border border-white/10">
-                <Image src="/images/aspen.png" alt="EstateLink Dynamic Storytelling" fill className="object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+              <div style={{ position: 'relative', width: '100%', height: '260px', overflow: 'hidden' }} className="rounded-2xl border border-white/10">
+                <img src="/images/aspen.png" alt="EstateLink Dynamic Storytelling" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
                 <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs font-mono text-white">
                   <span>The Aspen Pavilion • Single Link View</span>
                   <span className="text-[#10b981] font-bold">Live 3D Model Embedded</span>
@@ -341,9 +341,9 @@ export default function EstateLinkPage() {
                 <span className="text-xs font-mono text-gray-400">estatelink.co/{customSlug}</span>
               </div>
 
-              <div className="relative h-80 rounded-2xl overflow-hidden border border-white/10 group">
-                <Image src={selectedImage} alt={propertyTitle} fill className="object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
+              <div style={{ position: 'relative', width: '100%', height: '320px', overflow: 'hidden' }} className="rounded-2xl border border-white/10 group">
+                <img src={selectedImage} alt={propertyTitle} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent pointer-events-none" />
 
                 <div className="absolute top-4 left-4">
                   <span className="px-3 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/15 text-xs font-mono text-emerald-400 flex items-center gap-1.5">

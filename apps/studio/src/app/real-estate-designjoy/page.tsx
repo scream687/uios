@@ -168,15 +168,13 @@ export default function EstateJoyRealEstatePage() {
                 <p className="text-sm text-gray-400">Unlimited 3D renders, CAD walkthroughs, floor plans, and Webflow code for your developments.</p>
               </div>
 
-              {/* Sample Render Carousel Box */}
-              <div className="relative h-56 rounded-2xl overflow-hidden border border-white/10">
-                <Image
+              <div style={{ position: 'relative', width: '100%', height: '220px', overflow: 'hidden' }} className="rounded-2xl border border-white/10">
+                <img
                   src="/images/aspen.png"
                   alt="Aspen Villa Render"
-                  fill
-                  className="object-cover"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
                 <div className="absolute bottom-4 left-4 right-4 text-xs font-mono text-white flex items-center justify-between">
                   <span>Aspen Glass Pavilion 3D Render</span>
                   <span className="text-[#e2ff00] font-bold">Delivered in 48h</span>
