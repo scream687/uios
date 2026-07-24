@@ -1,0 +1,7 @@
+{
+  "layoutPattern": "12-column-fluid-bento",
+  "heroPattern": "split-headline-and-interactive-card",
+  "marqueePattern": "dual-row-opposing-infinite-scroll",
+  "pricingPattern": "signature-card-with-billing-toggle",
+  "faqPattern": "smooth-height-framer-accordion"
+}

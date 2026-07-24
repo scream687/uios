@@ -1,0 +1,13 @@
+{
+  "spacing": "large",
+  "radius": 16,
+  "tone": "quiet-confidence",
+  "headlines": "oversized-extrabold",
+  "imagery": "architectural-photorealistic",
+  "avoid": [
+    "cheap glassmorphism",
+    "purple gradients",
+    "overused SaaS cards",
+    "synthetic marketing hype"
+  ]
+}

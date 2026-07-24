@@ -1,0 +1,7 @@
+{
+  "minContrastRatio": 6.4,
+  "focusRingPx": 2,
+  "focusRingColor": "#e2ff00",
+  "requireAriaLabels": true,
+  "requiredRoles": ["banner", "region", "navigation", "dialog"]
+}

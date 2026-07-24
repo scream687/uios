@@ -1,0 +1,39 @@
+{
+  "system": "UIOS v2 Genesis Master Context",
+  "version": "2.4.0",
+  "project": {
+    "name": "EstateLink",
+    "domain": "estatelink.co",
+    "type": "Single-Link Real Estate Presentation Engine"
+  },
+  "brand": {
+    "archetype": "DesignJoy Subscription",
+    "personality": ["Luxury", "Editorial", "Confident", "Swiss Minimal", "Architecture-Inspired"],
+    "colors": {
+      "background": "#080808",
+      "foreground": "#ffffff",
+      "card": "#131315",
+      "primary": "#e2ff00",
+      "accent": "#10b981",
+      "border": "rgba(255,255,255,0.12)"
+    },
+    "typography": {
+      "fontHeading": "Figtree, sans-serif",
+      "fontSerifItalic": "Instrument Serif, Playfair Display, serif",
+      "heroSize": "88px",
+      "tracking": "-0.045em",
+      "lineHeight": "0.98"
+    }
+  },
+  "skillsKnowledge": {
+    "luxury": { "spacing": "large", "radius": 16, "tone": "quiet-confidence" },
+    "editorial": { "headingTracking": "-0.045em", "sectionPaddingY": "144px", "gridColumns": 12 },
+    "motion": { "easing": "cubic-bezier(0.16, 1, 0.3, 1)", "durationNormalMs": 250, "staggerMs": 40 },
+    "wcag": { "minContrastRatio": 6.4, "focusRingPx": 2, "focusRingColor": "#e2ff00" }
+  },
+  "research": {
+    "referenceSite": "https://www.designjoy.co/",
+    "layoutPattern": "12-column-fluid-bento",
+    "marqueePattern": "dual-row-opposing-infinite-scroll"
+  }
+}

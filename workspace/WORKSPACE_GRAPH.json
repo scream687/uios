@@ -1,0 +1,53 @@
+{
+  "system": "UIOS Workspace Graph Engine",
+  "version": "2.4.0",
+  "nodes": [
+    {
+      "path": "workspace/docs/04_brand.md",
+      "owner": "Brand Discovery Agent",
+      "depends_on": ["workspace/docs/01_project.md", "workspace/docs/02_vision.md"],
+      "produces": ["workspace/knowledge/luxury.design.json", "workspace/knowledge/editorial.rules.json"],
+      "consumed_by": ["Luxury Skill", "Editorial Skill", "Swiss Skill", "Typography Skill", "Compiler Planner"]
+    },
+    {
+      "path": "workspace/docs/07_features.md",
+      "owner": "Product Architect Agent",
+      "depends_on": ["workspace/docs/01_project.md", "workspace/docs/03_business.md"],
+      "produces": ["workspace/knowledge/features.rules.json"],
+      "consumed_by": ["Compiler Planner", "React Emitter"]
+    },
+    {
+      "path": "workspace/knowledge/luxury.design.json",
+      "owner": "Luxury Skill",
+      "depends_on": ["workspace/docs/04_brand.md"],
+      "produces": ["workspace/MASTER_CONTEXT.json"],
+      "consumed_by": ["Knowledge Engine"]
+    },
+    {
+      "path": "workspace/research/patterns.json",
+      "owner": "Research Agent",
+      "depends_on": ["workspace/docs/04_brand.md", "workspace/docs/07_features.md"],
+      "produces": ["workspace/MASTER_CONTEXT.json"],
+      "consumed_by": ["Knowledge Engine"]
+    },
+    {
+      "path": "workspace/MASTER_CONTEXT.json",
+      "owner": "Knowledge Engine",
+      "depends_on": [
+        "workspace/docs/01_project.md",
+        "workspace/docs/04_brand.md",
+        "workspace/knowledge/luxury.design.json",
+        "workspace/research/patterns.json"
+      ],
+      "produces": ["workspace/SITE_BLUEPRINT.md"],
+      "consumed_by": ["Compiler Planner"]
+    },
+    {
+      "path": "workspace/SITE_BLUEPRINT.md",
+      "owner": "Compiler Planner",
+      "depends_on": ["workspace/MASTER_CONTEXT.json"],
+      "produces": ["apps/studio/src/app/estatelink/page.tsx"],
+      "consumed_by": ["UIOS Compiler Core"]
+    }
+  ]
+}
