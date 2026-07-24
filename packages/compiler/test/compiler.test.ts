@@ -91,6 +91,33 @@ test('Layer 4 & 19: Token Compiler & Emitters produce multi-target code', () => 
   assert.ok(vueOutput.code.includes('a-layout'));
 });
 
+test('Layer 4: BrandDNAEngine synthesizes custom and new visual design archetypes', () => {
+  const dnaEngine = new BrandDNAEngine();
+
+  const starck = dnaEngine.synthesize('Philippe Starck Constructivist');
+  assert.strictEqual(starck.colors.background, '#e2ded7');
+  assert.strictEqual(starck.colors.primary, '#e52424');
+
+  const ampera = dnaEngine.synthesize('Ampera Industrial Freight');
+  assert.strictEqual(ampera.colors.background, '#0a0a0a');
+  assert.strictEqual(ampera.colors.primary, '#ff3b00');
+
+  const artify = dnaEngine.synthesize('Artify AI Obsidian');
+  assert.strictEqual(artify.colors.background, '#0d0d0e');
+  assert.strictEqual(artify.colors.primary, '#e2ff00');
+
+  const margarita = dnaEngine.synthesize('Botanical Margarita Editorial');
+  assert.strictEqual(margarita.colors.background, '#f4efe4');
+  assert.strictEqual(margarita.colors.primary, '#d48806');
+
+  const travelish = dnaEngine.synthesize('Travelish Sanctuary Minimal');
+  assert.strictEqual(travelish.colors.background, '#f8f9fa');
+  assert.strictEqual(travelish.colors.primary, '#3a8088');
+
+  const customTokens = dnaEngine.synthesize('Linear Dark', { primary: '#ff0055' });
+  assert.strictEqual(customTokens.colors.primary, '#ff0055');
+});
+
 test('Layer 4: BrandDNAEngine applies custom user color palette overrides', () => {
   const dnaEngine = new BrandDNAEngine();
   const tokens = dnaEngine.synthesize('Stripe SaaS', {

@@ -30,7 +30,12 @@ export interface BrandTokens {
     | 'Air Sculpture'
     | 'Visitors Blueprint'
     | 'Eindhoven Editorial'
-    | 'MindMarket Storybook';
+    | 'MindMarket Storybook'
+    | 'Philippe Starck Constructivist'
+    | 'Ampera Industrial Freight'
+    | 'Artify AI Obsidian'
+    | 'Botanical Margarita Editorial'
+    | 'Travelish Sanctuary Minimal';
   colors: {
     background: string;
     foreground: string;
@@ -84,6 +89,216 @@ export class BrandDNAEngine {
 
   private synthesizeRaw(archetype: BrandTokens['archetype']): BrandTokens {
     switch (archetype) {
+      case 'Philippe Starck Constructivist':
+        return {
+          archetype: 'Philippe Starck Constructivist',
+          colors: {
+            background: '#e2ded7', // Newsprint paper canvas
+            foreground: '#000000', // Stark pitch black typography
+            card: '#ffffff',       // Bio quote card island
+            cardForeground: '#000000',
+            primary: '#e52424',    // Electric crimson accent
+            primaryForeground: '#ffffff',
+            secondary: '#222222',  // Charcoal dark structural elements
+            accent: '#e52424',     // Crimson vertical typography strip
+            border: '#000000',     // Stark black border
+            ring: 'rgba(229, 36, 36, 0.4)',
+            gradientHero: 'linear-gradient(180deg, #e2ded7 0%, #d8d3cb 100%)',
+          },
+          typography: {
+            fontFamilyHeading: 'Impact, Bebas Neue, Switzer, Inter, ui-sans-serif, sans-serif',
+            fontFamilyBody: 'HelveticaNeue, Inter, ui-sans-serif, sans-serif',
+            fontSizeHero: '160px',
+            fontSizeH1: '90px',
+            fontSizeH2: '56px',
+            fontSizeBody: '17px',
+            lineHeightHero: '0.85',
+          },
+          radius: {
+            sm: '0px',
+            md: '0px',
+            lg: '0px',
+            full: '9999px',
+          },
+          shadows: {
+            card: 'none — 0px flat newsprint brutalist layout',
+            glow: '0 0 0 1px #000000',
+          },
+          motion: {
+            ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
+            durationFast: '150ms',
+            durationNormal: '300ms',
+          },
+        };
+
+      case 'Ampera Industrial Freight':
+        return {
+          archetype: 'Ampera Industrial Freight',
+          colors: {
+            background: '#0a0a0a', // Pitch black industrial canvas
+            foreground: '#f4f4f0', // Crisp off-white display typography
+            card: '#161616',       // Cargo container card surface
+            cardForeground: '#f4f4f0',
+            primary: '#ff3b00',    // High-vis safety orange
+            primaryForeground: '#0a0a0a',
+            secondary: '#ff4500',  // Safety orange accent badge
+            accent: '#ff3b00',     // Highlight circle callout
+            border: 'rgba(255, 59, 0, 0.3)',
+            ring: 'rgba(255, 59, 0, 0.5)',
+            gradientHero: 'linear-gradient(180deg, #0a0a0a 0%, #ff3b00 100%)',
+          },
+          typography: {
+            fontFamilyHeading: 'Druk Wide, Anton, Bebas Neue, Switzer, ui-sans-serif, sans-serif',
+            fontFamilyBody: 'Inter, system-ui, ui-sans-serif, sans-serif',
+            fontSizeHero: '180px',
+            fontSizeH1: '100px',
+            fontSizeH2: '60px',
+            fontSizeBody: '16px',
+            lineHeightHero: '0.82',
+          },
+          radius: {
+            sm: '4px',
+            md: '8px',
+            lg: '9999px', // Pill navigation tags
+            full: '9999px',
+          },
+          shadows: {
+            card: 'none — surface contrast (#0a0a0a -> #161616)',
+            glow: '0 0 30px -5px rgba(255, 59, 0, 0.4)',
+          },
+          motion: {
+            ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
+            durationFast: '150ms',
+            durationNormal: '300ms',
+          },
+        };
+
+      case 'Artify AI Obsidian':
+        return {
+          archetype: 'Artify AI Obsidian',
+          colors: {
+            background: '#0d0d0e', // Deep obsidian black
+            foreground: '#ffffff', // Pure white headers
+            card: '#17181c',       // Dark charcoal card island
+            cardForeground: '#e2e4e9',
+            primary: '#e2ff00',    // Electric neon lime/yellow CTA
+            primaryForeground: '#0d0d0e',
+            secondary: '#124332',  // Emerald green highlight card
+            accent: '#e2ff00',
+            border: 'rgba(255, 255, 255, 0.08)',
+            ring: 'rgba(226, 255, 0, 0.4)',
+            gradientHero: 'linear-gradient(180deg, #0d0d0e 0%, #17181c 100%)',
+          },
+          typography: {
+            fontFamilyHeading: 'Plus Jakarta Sans, Inter, Geist Sans, ui-sans-serif, sans-serif',
+            fontFamilyBody: 'Plus Jakarta Sans, Inter, ui-sans-serif, sans-serif',
+            fontSizeHero: '64px',
+            fontSizeH1: '48px',
+            fontSizeH2: '36px',
+            fontSizeBody: '16px',
+            lineHeightHero: '1.05',
+          },
+          radius: {
+            sm: '12px',
+            md: '20px',
+            lg: '24px', // Rounded Bento gallery tiles
+            full: '9999px',
+          },
+          shadows: {
+            card: '0 8px 32px rgba(0, 0, 0, 0.4)',
+            glow: '0 0 40px -5px rgba(226, 255, 0, 0.3)',
+          },
+          motion: {
+            ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
+            durationFast: '150ms',
+            durationNormal: '300ms',
+          },
+        };
+
+      case 'Botanical Margarita Editorial':
+        return {
+          archetype: 'Botanical Margarita Editorial',
+          colors: {
+            background: '#f4efe4', // Warm parchment sand canvas
+            foreground: '#0c281e', // Deep jungle green typography
+            card: '#ffffff',       // Parchment card island
+            cardForeground: '#0c281e',
+            primary: '#d48806',    // Rich warm gold display
+            primaryForeground: '#ffffff',
+            secondary: '#0c281e',  // Jungle green border
+            accent: '#e69a10',     // Warm gold highlight
+            border: 'rgba(12, 40, 30, 0.15)',
+            ring: 'rgba(212, 136, 6, 0.4)',
+            gradientHero: 'linear-gradient(180deg, #f4efe4 0%, #e8e1d3 100%)',
+          },
+          typography: {
+            fontFamilyHeading: 'Tiempos Headline, Reckless Neue, Georgia, serif',
+            fontFamilyBody: 'Saans, Inter, ui-sans-serif, sans-serif',
+            fontSizeHero: '88px',
+            fontSizeH1: '64px',
+            fontSizeH2: '44px',
+            fontSizeBody: '16px',
+            lineHeightHero: '0.95',
+          },
+          radius: {
+            sm: '8px',
+            md: '16px',
+            lg: '24px',
+            full: '9999px',
+          },
+          shadows: {
+            card: 'rgba(12, 40, 30, 0.08) 0px 12px 24px 0px',
+            glow: 'rgba(212, 136, 6, 0.2) 0px 8px 24px 0px',
+          },
+          motion: {
+            ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
+            durationFast: '150ms',
+            durationNormal: '300ms',
+          },
+        };
+
+      case 'Travelish Sanctuary Minimal':
+        return {
+          archetype: 'Travelish Sanctuary Minimal',
+          colors: {
+            background: '#f8f9fa', // Soft mist off-white
+            foreground: '#1e252b', // Deep slate typography
+            card: '#ffffff',       // Clean soft card island
+            cardForeground: '#1e252b',
+            primary: '#3a8088',    // Muted sage/cyan accent
+            primaryForeground: '#ffffff',
+            secondary: '#eef2f5',  // Soft slate background stack
+            accent: '#3a8088',
+            border: 'rgba(30, 37, 43, 0.08)',
+            ring: 'rgba(58, 128, 136, 0.3)',
+            gradientHero: 'linear-gradient(180deg, #f8f9fa 0%, #eef2f5 100%)',
+          },
+          typography: {
+            fontFamilyHeading: 'Outfit, Satoshi, DM Sans, Inter, ui-sans-serif, sans-serif',
+            fontFamilyBody: 'Outfit, Satoshi, DM Sans, Inter, ui-sans-serif, sans-serif',
+            fontSizeHero: '56px',
+            fontSizeH1: '42px',
+            fontSizeH2: '30px',
+            fontSizeBody: '16px',
+            lineHeightHero: '1.10',
+          },
+          radius: {
+            sm: '12px',
+            md: '20px',
+            lg: '28px',
+            full: '9999px',
+          },
+          shadows: {
+            card: 'rgba(30, 37, 43, 0.04) 0px 4px 12px 0px, rgba(30, 37, 43, 0.06) 0px 16px 32px 0px',
+            glow: 'rgba(58, 128, 136, 0.15) 0px 8px 24px 0px',
+          },
+          motion: {
+            ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
+            durationFast: '150ms',
+            durationNormal: '300ms',
+          },
+        };
+
       case 'MindMarket Storybook':
         return {
           archetype: 'MindMarket Storybook',
