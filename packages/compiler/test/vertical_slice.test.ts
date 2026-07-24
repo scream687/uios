@@ -2,27 +2,25 @@ import test from 'node:test';
 import assert from 'node:assert';
 import {
   RuntimeKernel,
-  ConstraintResolutionEngine,
+  ConstraintSolverEngine,
   type Engine,
   type BaseArtifact,
   type ValidationResult,
-  type EngineMetrics,
-  type ConstraintNode,
+  type ExecutionContext,
+  type ConstraintRule,
 } from '../dist/index.js';
 
-interface PromptInputArtifact extends BaseArtifact {
+interface IntentInputArtifact extends BaseArtifact {
   type: 'intent';
-  prompt: string;
+  payload: { prompt: string };
 }
 
 interface ProjectOutputArtifact extends BaseArtifact {
   type: 'project';
-  domain: string;
-  brandName: string;
-  accentColor: string;
+  payload: { domain: string; brandName: string; accentColor: string };
 }
 
-class TestIntentEngine implements Engine<PromptInputArtifact, ProjectOutputArtifact> {
+class TestIntentEngine implements Engine<IntentInputArtifact, ProjectOutputArtifact> {
   public id = 'IntentEngine';
 
   public consumes() {
@@ -33,71 +31,103 @@ class TestIntentEngine implements Engine<PromptInputArtifact, ProjectOutputArtif
     return ['project' as const];
   }
 
-  public validate(input: PromptInputArtifact): ValidationResult {
+  public validate(input: IntentInputArtifact, context: ExecutionContext): ValidationResult {
     return {
-      valid: !!input.prompt && input.prompt.length > 0,
+      valid: !!input.payload.prompt && input.payload.prompt.length > 0,
       errors: [],
     };
   }
 
-  public async execute(input: PromptInputArtifact): Promise<ProjectOutputArtifact> {
+  public async execute(input: IntentInputArtifact, context: ExecutionContext): Promise<ProjectOutputArtifact> {
+    context.logger(`Executing IntentEngine for prompt: ${input.payload.prompt}`);
+
     return {
-      id: 'project_output_1',
+      id: 'project_artifact_v1',
       type: 'project',
       version: 1,
       owner: 'IntentEngine',
-      contentHash: 'sha256:test',
+      contentHash: 'sha256:project_v1_hash',
       createdAt: new Date().toISOString(),
-      domain: 'real-estate',
-      brandName: 'EstateLink',
-      accentColor: '#e2ff00',
+      provenance: [input.id],
+      payload: {
+        domain: 'real-estate',
+        brandName: 'EstateLink',
+        accentColor: '#e2ff00',
+      },
     };
   }
 
-  public rollback(): void {}
-
-  public metrics(): EngineMetrics {
-    return { executionTimeMs: 4, memoryUsageMb: 12, cacheHit: false };
+  public rollback(context: ExecutionContext): void {
+    context.logger('Rolling back IntentEngine execution.');
   }
 }
 
-test('Vertical Slice: Universal Engine Protocol & RuntimeKernel Execution', async () => {
+test('Vertical Slice: OS RuntimeKernel Execution, Immutability & EventBus Pub/Sub', async () => {
   const kernel = new RuntimeKernel();
   const intentEngine = new TestIntentEngine();
 
   kernel.registerEngine(intentEngine);
 
-  const inputArtifact: PromptInputArtifact = {
-    id: 'user_prompt_1',
+  const stateChanges: string[] = [];
+  kernel.eventBus.on('engine:stateChange', (evt) => {
+    stateChanges.push(`${evt.engineId}:${evt.state}`);
+  });
+
+  let artifactCreatedNotification = false;
+  kernel.eventBus.on('artifact:created', () => {
+    artifactCreatedNotification = true;
+  });
+
+  const inputArtifact: IntentInputArtifact = {
+    id: 'user_prompt_v1',
     type: 'intent',
     version: 1,
     owner: 'User',
-    contentHash: 'hash_123',
+    contentHash: 'sha256:prompt_v1_hash',
     createdAt: new Date().toISOString(),
-    prompt: 'Build luxury real estate platform EstateLink',
+    provenance: [],
+    payload: { prompt: 'Build luxury real estate platform EstateLink' },
   };
 
-  const output = await kernel.executeStep<PromptInputArtifact, ProjectOutputArtifact>(
+  const output = await kernel.executeEngine<IntentInputArtifact, ProjectOutputArtifact>(
     'IntentEngine',
     inputArtifact
   );
 
-  assert.strictEqual(output.domain, 'real-estate');
-  assert.strictEqual(output.brandName, 'EstateLink');
-  assert.strictEqual(kernel.getArtifact('project_output_1')?.id, 'project_output_1');
+  assert.strictEqual(output.payload.domain, 'real-estate');
+  assert.strictEqual(output.payload.brandName, 'EstateLink');
+  assert.strictEqual(kernel.getEngineState('IntentEngine'), 'Succeeded');
+  assert.strictEqual(artifactCreatedNotification, true);
+  assert.deepStrictEqual(stateChanges, ['IntentEngine:Running', 'IntentEngine:Succeeded']);
+
+  // Immutability Check: Store latest version and verify history tracking
+  const history = kernel.artifactStore.getHistory('project_artifact_v1');
+  assert.strictEqual(history.length, 1);
+  assert.strictEqual(history[0].payload.brandName, 'EstateLink');
 });
 
-test('Vertical Slice: Constraint Resolution Engine solves multi-agent conflicts', () => {
-  const resolver = new ConstraintResolutionEngine();
+test('Vertical Slice: ConstraintSolverEngine solves multi-dimensional HARD/SOFT/PREFERENCE rules', () => {
+  const solver = new ConstraintSolverEngine();
 
-  const constraints: ConstraintNode[] = [
-    { source: 'LuxurySkill', capability: 'spacing', property: 'paddingY', value: '144px', priority: 90, confidence: 0.95 },
-    { source: 'PerformanceSkill', capability: 'spacing', property: 'paddingY', value: '48px', priority: 70, confidence: 0.80 },
-    { source: 'AccessibilitySkill', capability: 'spacing', property: 'paddingY', value: '64px', priority: 85, confidence: 0.90 },
+  const rules: ConstraintRule[] = [
+    // Hard Constraint: WCAG AAA Contrast (Accessibility)
+    { id: 'wcag-contrast', source: 'AccessibilitySkill', level: 'HARD', dimension: 'accessibility', property: 'minContrastRatio', value: 6.4, priority: 100, confidence: 1.0 },
+
+    // Soft Constraints: Spacing conflict between Luxury (144px) and Performance (48px)
+    { id: 'luxury-spacing', source: 'LuxurySkill', level: 'SOFT', dimension: 'spacing', property: 'paddingY', value: '144px', priority: 95, confidence: 0.95 },
+    { id: 'perf-spacing', source: 'PerformanceSkill', level: 'SOFT', dimension: 'spacing', property: 'paddingY', value: '48px', priority: 70, confidence: 0.80 },
+
+    // Preference: Custom typography tracking
+    { id: 'editorial-tracking', source: 'EditorialSkill', level: 'PREFERENCE', dimension: 'typography', property: 'tracking', value: '-0.045em', priority: 50, confidence: 0.90 },
   ];
 
-  const resolved = resolver.resolveConflicts(constraints);
+  const result = solver.solve(rules);
 
-  // LuxurySkill wins because weight (90 * 0.95 = 85.5) > Accessibility (85 * 0.90 = 76.5) > Performance (70 * 0.80 = 56)
-  assert.strictEqual(resolved['spacing:paddingY'], '144px');
+  assert.strictEqual(result.resolved['accessibility:minContrastRatio'], 6.4);
+  assert.strictEqual(result.resolved['spacing:paddingY'], '144px');
+  assert.strictEqual(result.resolved['typography:tracking'], '-0.045em');
+
+  // Verify decision provenance tracing
+  assert.match(result.provenanceTrace['accessibility:minContrastRatio'], /Enforced HARD constraint/);
+  assert.match(result.provenanceTrace['spacing:paddingY'], /Resolved SOFT constraint from LuxurySkill/);
 });
