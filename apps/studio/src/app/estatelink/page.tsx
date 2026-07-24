@@ -2,501 +2,341 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import {
-  Link2,
-  Sparkles,
-  ArrowUpRight,
-  ShieldCheck,
-  Zap,
-  BarChart3,
-  Layers,
-  Copy,
-  Check,
-  Eye,
-  Lock,
-  Share2,
-  Building2,
-  Maximize2,
-  BedDouble,
-  Bath,
-  ChevronRight,
-  X,
-  SlidersHorizontal,
-  CheckCircle2,
-  ArrowRight,
-  QrCode,
-  Smartphone,
-} from 'lucide-react';
 
 export default function EstateLinkPage() {
-  // Interactive Single-Link Simulator State
-  const [propertyTitle, setPropertyTitle] = useState('The Aspen Glass Pavilion');
-  const [propertyPrice, setPropertyPrice] = useState('$14,800,000');
-  const [propertyCity, setPropertyCity] = useState('Aspen, CO');
-  const [customSlug, setCustomSlug] = useState('aspen-pavilion');
+  const [activeSlug, setActiveSlug] = useState('aspen-sanctuary');
+  const [propertyTitle, setPropertyTitle] = useState('The Aspen Sanctuary');
+  const [location, setLocation] = useState('Aspen, Colorado');
+  const [price, setPrice] = useState('$16,500,000');
   const [copied, setCopied] = useState(false);
-  const [selectedImage, setSelectedImage] = useState('/images/aspen.png');
+  const [viewMode, setViewMode] = useState<'mobile' | 'desktop'>('mobile');
 
-  // Modal State
-  const [trialModalOpen, setTrialModalOpen] = useState(false);
+  const properties = [
+    {
+      slug: 'aspen-sanctuary',
+      title: 'The Aspen Sanctuary',
+      location: 'Aspen, Colorado',
+      price: '$16,500,000',
+      specs: '6 Beds • 8 Baths • 9,400 Sq Ft',
+      image: '/images/aspen.png',
+      architect: 'Olson Kundig Architecture',
+    },
+    {
+      slug: 'miami-penthouse',
+      title: 'Solara Penthouse 54',
+      location: 'Miami, Florida',
+      price: '$12,800,000',
+      specs: '4 Beds • 5 Baths • 6,200 Sq Ft',
+      image: '/images/miami.png',
+      architect: 'SAOTA Architects',
+    },
+    {
+      slug: 'austin-estate',
+      title: 'Lake Austin Waterfront',
+      location: 'Austin, Texas',
+      price: '$8,900,000',
+      specs: '5 Beds • 6 Baths • 7,800 Sq Ft',
+      image: '/images/austin.png',
+      architect: 'Marlon Blackwell Architects',
+    },
+  ];
 
-  const handleCopyLink = () => {
+  const activeProp = properties.find((p) => p.slug === activeSlug) || properties[0];
+
+  const handleCopy = () => {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const sampleProperties = [
-    { title: 'The Aspen Glass Pavilion', price: '$14,800,000', city: 'Aspen, CO', slug: 'aspen-pavilion', image: '/images/aspen.png' },
-    { title: 'Skyline Brickell Penthouse', price: '$8,450,000', city: 'Miami, FL', slug: 'brickell-skyline', image: '/images/miami.png' },
-    { title: 'Austin Waterfront Villa', price: '$6,200,000', city: 'Austin, TX', slug: 'austin-waterfront', image: '/images/austin.png' },
-    { title: 'Solara Commercial Tower', price: '$24,000,000', city: 'Dallas, TX', slug: 'solara-dallas', image: '/images/dallas.png' },
-  ];
-
   return (
-    <div className="min-h-screen bg-[#090a0c] text-[#f7f8f8] font-sans antialiased selection:bg-[#10b981] selection:text-[#090a0c]">
-      {/* Header Navigation Bar */}
-      <header className="border-b border-white/10 bg-[#090a0c]/90 backdrop-blur-xl sticky top-0 z-50">
-        <div className="max-w-[1400px] mx-auto px-6 h-20 flex items-center justify-between">
+    <div className="min-h-screen bg-[#000000] text-[#ffffff] font-sans antialiased selection:bg-white selection:text-black">
+      {/* Minimal Header */}
+      <header className="border-b border-neutral-900 bg-black/80 backdrop-blur-md sticky top-0 z-50">
+        <div className="max-w-[1300px] mx-auto px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-[#10b981] flex items-center justify-center text-[#090a0c] font-bold text-xl shadow-[0_0_24px_rgba(16,185,129,0.4)]">
-              <Link2 className="w-5 h-5 text-[#090a0c]" />
-            </div>
-            <div>
-              <span className="font-extrabold tracking-tight text-white text-xl font-sans flex items-center gap-2">
-                EstateLink <span className="text-[#10b981] text-xs font-mono px-2 py-0.5 rounded bg-[#10b981]/10 border border-[#10b981]/30">v2 OS COMPILER</span>
-              </span>
-              <p className="text-[10px] font-mono text-gray-400">One Intelligent Link for Luxury Real Estate</p>
-            </div>
+            <span className="font-serif italic text-2xl font-normal tracking-tight text-white">EstateLink</span>
+            <span className="text-[11px] font-mono tracking-widest text-neutral-500 uppercase border border-neutral-800 px-2 py-0.5 rounded-full">
+              Editorial Edition
+            </span>
           </div>
 
-          {/* Navigation Links */}
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
-            <a href="#features" className="hover:text-white transition-colors">Features</a>
-            <a href="#builder" className="hover:text-[#10b981] transition-colors">Link Simulator</a>
-            <a href="#analytics" className="hover:text-white transition-colors">Analytics</a>
-            <a href="#pricing" className="hover:text-[#10b981] transition-colors">Pricing</a>
-            <Link href="/" className="text-gray-400 hover:text-white transition-colors font-mono text-xs">
-              ← UIOS Studio
+          <nav className="hidden md:flex items-center gap-10 text-sm tracking-wide text-neutral-400 font-light">
+            <a href="#philosophy" className="hover:text-white transition-colors">Philosophy</a>
+            <a href="#simulator" className="hover:text-white transition-colors">Interactive Link</a>
+            <a href="#curation" className="hover:text-white transition-colors">Presentation</a>
+            <a href="#membership" className="hover:text-white transition-colors">Membership</a>
+            <Link href="/" className="text-neutral-500 hover:text-white transition-colors font-mono text-xs">
+              ← Studio
             </Link>
           </nav>
 
-          {/* Action CTAs */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => setTrialModalOpen(true)}
-              className="px-5 py-2.5 bg-[#10b981] hover:bg-[#0ea5e9] text-[#090a0c] font-extrabold text-sm rounded-xl flex items-center gap-2 shadow-[0_0_24px_rgba(16,185,129,0.4)] transition-all font-sans"
-            >
-              <Sparkles className="w-4 h-4" />
-              <span>Generate EstateLink</span>
-            </button>
-          </div>
+          <a
+            href="#membership"
+            className="px-5 py-2.5 bg-white text-black font-medium text-xs tracking-wider uppercase rounded-full hover:bg-neutral-200 transition-all"
+          >
+            Request Access
+          </a>
         </div>
       </header>
 
       {/* HERO SECTION */}
-      <section className="relative pt-20 pb-24 border-b border-white/10 overflow-hidden bg-gradient-to-b from-[#0e1118] via-[#090a0c] to-[#090a0c]">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[450px] bg-gradient-to-tr from-[#10b981]/15 via-[#3b82f6]/10 to-transparent blur-[140px] pointer-events-none" />
-
-        <div className="max-w-[1400px] mx-auto px-6 relative z-10 text-center space-y-8">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#10b981]/15 border border-[#10b981]/30 text-[#10b981] font-mono text-xs shadow-inner">
-            <Zap className="w-3.5 h-3.5 text-emerald-400" />
-            <span>Architectural Simplicity • $1.8B Properties Shared via EstateLink</span>
+      <section className="pt-24 pb-32 border-b border-neutral-900">
+        <div className="max-w-[1300px] mx-auto px-8 space-y-12">
+          <div className="max-w-4xl space-y-6">
+            <p className="text-xs font-mono tracking-widest text-neutral-500 uppercase">
+              The Single Link Presentation Standard
+            </p>
+            <h1 className="text-6xl md:text-8xl font-normal tracking-tight leading-[0.98]">
+              One link. <br />
+              <span className="font-serif italic font-normal text-neutral-400">Pure architectural clarity.</span>
+            </h1>
+            <p className="text-neutral-400 text-lg md:text-xl font-light leading-relaxed max-w-2xl">
+              EstateLink transforms luxury property marketing into a single, high-resolution presentation link. No attachments, no PDF downloads, no fragmented emails.
+            </p>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white max-w-5xl mx-auto leading-[1.05]">
-            One Link for Your Entire <span className="italic font-serif font-normal text-[#10b981]">Luxury Portfolio</span>.
-          </h1>
-
-          <p className="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto font-normal">
-            Replace fragmented PDFs, static brochures, and multi-url emails with a single dynamic, trackable visual link. Designed for luxury brokers, developers, and sales teams.
-          </p>
-
-          {/* Interactive Link Input Simulator Banner */}
-          <div className="bg-[#12151c]/90 border border-white/15 rounded-2xl p-3 shadow-2xl max-w-3xl mx-auto backdrop-blur-xl flex flex-col sm:flex-row items-center gap-3">
-            <div className="flex-1 flex items-center gap-2 px-4 py-3 bg-[#090a0c] border border-white/10 rounded-xl w-full">
-              <span className="text-gray-500 font-mono text-sm">estatelink.co/</span>
-              <input
-                type="text"
-                value={customSlug}
-                onChange={(e) => setCustomSlug(e.target.value)}
-                placeholder="your-property-name"
-                className="bg-transparent text-sm text-white font-mono font-medium focus:outline-none w-full"
-              />
+          {/* Quick Slug Interactive Bar */}
+          <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 max-w-2xl">
+            <div className="flex-1 bg-neutral-950 border border-neutral-800 rounded-full px-6 py-4 flex items-center gap-3">
+              <span className="text-neutral-600 font-mono text-sm">estatelink.co/</span>
+              <span className="text-white font-mono text-sm font-medium">{activeSlug}</span>
             </div>
-
             <button
-              onClick={handleCopyLink}
-              className="w-full sm:w-auto px-6 py-3 bg-[#10b981] hover:bg-[#0ea5e9] text-[#090a0c] font-bold text-sm rounded-xl font-mono flex items-center justify-center gap-2 transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] shrink-0"
+              onClick={handleCopy}
+              className="px-8 py-4 bg-white text-black font-medium text-xs font-mono tracking-wider uppercase rounded-full hover:bg-neutral-200 transition-all shrink-0"
             >
-              {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-              <span>{copied ? 'Link Copied!' : 'Copy EstateLink'}</span>
+              {copied ? 'Link Copied' : 'Copy Link'}
             </button>
           </div>
         </div>
       </section>
 
-      {/* METRICS TICKER BAR */}
-      <section className="border-b border-white/10 bg-[#0c0e12] py-8">
-        <div className="max-w-[1400px] mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <div className="space-y-1">
-            <div className="text-3xl font-extrabold text-white font-mono">$1.84B+</div>
-            <div className="text-xs font-mono text-gray-400">Property Value Shared</div>
+      {/* INTERACTIVE LINK SIMULATOR & VIEWPORT */}
+      <section id="simulator" className="py-28 border-b border-neutral-900 bg-[#050505]">
+        <div className="max-w-[1300px] mx-auto px-8 space-y-12">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div>
+              <p className="text-xs font-mono tracking-widest text-neutral-500 uppercase mb-2">Live Presentation Viewport</p>
+              <h2 className="text-3xl md:text-4xl font-normal text-white">Experience an EstateLink Presentation</h2>
+            </div>
+
+            {/* Controls */}
+            <div className="flex items-center gap-3 border border-neutral-800 p-1 rounded-full bg-black">
+              <button
+                onClick={() => setViewMode('mobile')}
+                className={`px-4 py-1.5 rounded-full text-xs font-mono transition-all ${
+                  viewMode === 'mobile' ? 'bg-white text-black font-bold' : 'text-neutral-400 hover:text-white'
+                }`}
+              >
+                Mobile View
+              </button>
+              <button
+                onClick={() => setViewMode('desktop')}
+                className={`px-4 py-1.5 rounded-full text-xs font-mono transition-all ${
+                  viewMode === 'desktop' ? 'bg-white text-black font-bold' : 'text-neutral-400 hover:text-white'
+                }`}
+              >
+                Desktop View
+              </button>
+            </div>
           </div>
-          <div className="space-y-1">
-            <div className="text-3xl font-extrabold text-emerald-400 font-mono">99.8%</div>
-            <div className="text-xs font-mono text-gray-400">Buyer Open Rate</div>
+
+          {/* Property Switcher */}
+          <div className="flex flex-wrap gap-3">
+            {properties.map((p) => (
+              <button
+                key={p.slug}
+                onClick={() => setActiveSlug(p.slug)}
+                className={`px-5 py-2.5 rounded-full text-xs font-mono transition-all border ${
+                  activeSlug === p.slug
+                    ? 'border-white bg-white text-black font-medium'
+                    : 'border-neutral-800 bg-neutral-950 text-neutral-400 hover:border-neutral-600'
+                }`}
+              >
+                {p.title}
+              </button>
+            ))}
           </div>
-          <div className="space-y-1">
-            <div className="text-3xl font-extrabold text-white font-mono">15 Sec</div>
-            <div className="text-xs font-mono text-gray-400">Avg Setup Time</div>
-          </div>
-          <div className="space-y-1">
-            <div className="text-3xl font-extrabold text-cyan-400 font-mono">14,200+</div>
-            <div className="text-xs font-mono text-gray-400">Active EstateLinks Created</div>
+
+          {/* Device Mockup Stage */}
+          <div className="pt-6 flex justify-center">
+            {viewMode === 'mobile' ? (
+              /* Mobile Phone Frame */
+              <div className="w-[380px] bg-neutral-950 border border-neutral-800 rounded-[48px] p-4 shadow-2xl space-y-4">
+                {/* Notch */}
+                <div className="w-32 h-4 bg-neutral-900 rounded-full mx-auto" />
+
+                {/* Phone Content Screen */}
+                <div className="bg-black rounded-[36px] overflow-hidden border border-neutral-900 space-y-4 pb-6">
+                  <div className="relative h-72 w-full">
+                    <img
+                      src={activeProp.image}
+                      alt={activeProp.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30" />
+                    <div className="absolute top-4 left-4 text-[10px] font-mono tracking-widest text-neutral-300 uppercase bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
+                      EstateLink Verified
+                    </div>
+                  </div>
+
+                  <div className="px-6 space-y-3">
+                    <div className="text-[11px] font-mono tracking-wider text-neutral-400 uppercase">
+                      {activeProp.location}
+                    </div>
+                    <h3 className="text-2xl font-serif italic text-white">{activeProp.title}</h3>
+                    <div className="text-xl font-mono text-white">{activeProp.price}</div>
+                    <p className="text-xs text-neutral-400 font-light">{activeProp.specs}</p>
+
+                    <div className="pt-2 border-t border-neutral-900 text-[11px] font-mono text-neutral-500">
+                      Architecture by {activeProp.architect}
+                    </div>
+
+                    <button
+                      onClick={handleCopy}
+                      className="w-full py-3 bg-white text-black font-medium text-xs font-mono uppercase tracking-wider rounded-xl mt-2"
+                    >
+                      Inquire Directly
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              /* Desktop Browser Viewport Frame */
+              <div className="w-full max-w-4xl bg-neutral-950 border border-neutral-800 rounded-3xl overflow-hidden shadow-2xl">
+                {/* Window Header */}
+                <div className="px-6 py-4 border-b border-neutral-900 flex items-center justify-between bg-neutral-900/50">
+                  <div className="flex items-center gap-2">
+                    <span className="w-3 h-3 rounded-full bg-neutral-800" />
+                    <span className="w-3 h-3 rounded-full bg-neutral-800" />
+                    <span className="w-3 h-3 rounded-full bg-neutral-800" />
+                  </div>
+                  <span className="text-xs font-mono text-neutral-400">https://estatelink.co/{activeSlug}</span>
+                  <div className="w-12" />
+                </div>
+
+                {/* Desktop Content */}
+                <div className="p-8 grid grid-cols-1 md:grid-cols-12 gap-8 items-center bg-black">
+                  <div className="md:col-span-7 relative h-80 rounded-2xl overflow-hidden border border-neutral-900">
+                    <img src={activeProp.image} alt={activeProp.title} className="w-full h-full object-cover" />
+                  </div>
+
+                  <div className="md:col-span-5 space-y-4">
+                    <span className="text-xs font-mono tracking-widest text-neutral-500 uppercase">{activeProp.location}</span>
+                    <h3 className="text-3xl font-serif italic text-white">{activeProp.title}</h3>
+                    <div className="text-2xl font-mono text-white">{activeProp.price}</div>
+                    <p className="text-xs text-neutral-400 font-light leading-relaxed">{activeProp.specs}</p>
+                    <div className="text-xs font-mono text-neutral-500 pt-2 border-t border-neutral-900">
+                      {activeProp.architect}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
 
-      {/* FEATURE BENTO GRID */}
-      <section id="features" className="py-24 border-b border-white/10">
-        <div className="max-w-[1400px] mx-auto px-6 space-y-16">
-          <div className="max-w-3xl">
-            <div className="text-xs font-mono text-[#10b981] uppercase tracking-wider mb-2">Architectural Engineering</div>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-white">
-              Designed for luxury presentation, <span className="italic font-serif font-normal text-[#10b981]">engineered for speed</span>
+      {/* EDITORIAL PHILOSOPHY GRID */}
+      <section id="philosophy" className="py-32 border-b border-neutral-900">
+        <div className="max-w-[1300px] mx-auto px-8 space-y-20">
+          <div className="max-w-2xl space-y-4">
+            <p className="text-xs font-mono tracking-widest text-neutral-500 uppercase">Design Philosophy</p>
+            <h2 className="text-4xl md:text-5xl font-normal text-white">
+              Why luxury estate marketing requires <span className="font-serif italic font-normal text-neutral-400">restraint</span>
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8">
-            {/* Feature 1 */}
-            <div className="lg:col-span-8 bg-[#12151c] border border-white/10 hover:border-[#10b981]/40 rounded-3xl p-8 space-y-6 transition-all flex flex-col justify-between">
-              <div className="space-y-4">
-                <div className="w-12 h-12 rounded-2xl bg-[#10b981]/10 border border-[#10b981]/30 flex items-center justify-center text-[#10b981]">
-                  <Layers className="w-6 h-6" />
-                </div>
-                <h3 className="text-2xl font-bold text-white">Dynamic Architectural Storytelling</h3>
-                <p className="text-sm text-gray-400 leading-relaxed max-w-xl">
-                  Embed 4K video walkthroughs, 3D interactive renders, floor plans, and pricing specs into a single elegant viewport. No heavy downloads or attachment limits.
-                </p>
-              </div>
-
-              <div style={{ position: 'relative', width: '100%', height: '260px', overflow: 'hidden' }} className="rounded-2xl border border-white/10">
-                <img src="/images/aspen.png" alt="EstateLink Dynamic Storytelling" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs font-mono text-white">
-                  <span>The Aspen Pavilion • Single Link View</span>
-                  <span className="text-[#10b981] font-bold">Live 3D Model Embedded</span>
-                </div>
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="space-y-4 border-t border-neutral-900 pt-6">
+              <span className="text-xs font-mono text-neutral-500">01</span>
+              <h3 className="text-xl font-medium text-white">Zero Attachment Noise</h3>
+              <p className="text-sm text-neutral-400 font-light leading-relaxed">
+                High-net-worth buyers do not download 40MB PDF email attachments. A single link opens instantly across any device with total visual fidelity.
+              </p>
             </div>
 
-            {/* Feature 2 */}
-            <div className="lg:col-span-4 bg-[#12151c] border border-white/10 hover:border-[#10b981]/40 rounded-3xl p-8 space-y-6 transition-all flex flex-col justify-between">
-              <div className="space-y-4">
-                <div className="w-12 h-12 rounded-2xl bg-[#3b82f6]/10 border border-[#3b82f6]/30 flex items-center justify-center text-[#3b82f6]">
-                  <BarChart3 className="w-6 h-6" />
-                </div>
-                <h3 className="text-2xl font-bold text-white">Real-Time Buyer Analytics</h3>
-                <p className="text-sm text-gray-400 leading-relaxed">
-                  Know exactly when high-net-worth buyers open your EstateLink, which floor plans they inspect, and how long they spend reviewing specs.
-                </p>
-              </div>
-
-              <div className="bg-[#090a0c] border border-white/10 p-5 rounded-2xl space-y-3 font-mono text-xs">
-                <div className="flex justify-between text-gray-400">
-                  <span>BUYER ENGAGEMENT</span>
-                  <span className="text-emerald-400 font-bold">+42% Higher</span>
-                </div>
-                <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-[#10b981] to-[#3b82f6] w-[84%]" />
-                </div>
-                <div className="text-[10px] text-gray-500">Buyer inspected Aspen Villa 3D Floor Plan for 4m 12s</div>
-              </div>
+            <div className="space-y-4 border-t border-neutral-900 pt-6">
+              <span className="text-xs font-mono text-neutral-500">02</span>
+              <h3 className="text-xl font-medium text-white">Quiet Analytics</h3>
+              <p className="text-sm text-neutral-400 font-light leading-relaxed">
+                Know precisely when a client opens your presentation and which architectural details they inspect, without creepy tracking UI.
+              </p>
             </div>
 
-            {/* Feature 3 */}
-            <div className="lg:col-span-4 bg-[#12151c] border border-white/10 hover:border-[#10b981]/40 rounded-3xl p-8 space-y-6 transition-all flex flex-col justify-between">
-              <div className="space-y-4">
-                <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
-                  <Lock className="w-6 h-6" />
-                </div>
-                <h3 className="text-2xl font-bold text-white">Private Off-Market Passcode Protection</h3>
-                <p className="text-sm text-gray-400 leading-relaxed">
-                  Protect off-market luxury listings with passcode gates and digital buyer NDA sign-offs before unlocking property assets.
-                </p>
-              </div>
-            </div>
-
-            {/* Feature 4 */}
-            <div className="lg:col-span-8 bg-[#12151c] border border-white/10 hover:border-[#10b981]/40 rounded-3xl p-8 space-y-6 transition-all flex flex-col justify-between">
-              <div className="space-y-4">
-                <div className="w-12 h-12 rounded-2xl bg-[#10b981]/10 border border-[#10b981]/30 flex items-center justify-center text-[#10b981]">
-                  <Share2 className="w-6 h-6" />
-                </div>
-                <h3 className="text-2xl font-bold text-white">Custom Domain & One-Click Sharing</h3>
-                <p className="text-sm text-gray-400 leading-relaxed max-w-xl">
-                  Host links under your agency domain (`link.youragency.com/property`) and share instantly via SMS, WhatsApp, QR codes, or digital business cards.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 font-mono text-xs">
-                <div className="p-3 bg-[#090a0c] border border-white/10 rounded-xl flex items-center gap-2 text-gray-300">
-                  <QrCode className="w-4 h-4 text-[#10b981]" /> Instant QR Code
-                </div>
-                <div className="p-3 bg-[#090a0c] border border-white/10 rounded-xl flex items-center gap-2 text-gray-300">
-                  <Smartphone className="w-4 h-4 text-[#3b82f6]" /> SMS / WhatsApp
-                </div>
-                <div className="p-3 bg-[#090a0c] border border-white/10 rounded-xl flex items-center gap-2 text-gray-300">
-                  <ShieldCheck className="w-4 h-4 text-amber-400" /> Passcode Gate
-                </div>
-                <div className="p-3 bg-[#090a0c] border border-white/10 rounded-xl flex items-center gap-2 text-gray-300">
-                  <Sparkles className="w-4 h-4 text-cyan-400" /> Custom Domain
-                </div>
-              </div>
+            <div className="space-y-4 border-t border-neutral-900 pt-6">
+              <span className="text-xs font-mono text-neutral-500">03</span>
+              <h3 className="text-xl font-medium text-white">Private Access Control</h3>
+              <p className="text-sm text-neutral-400 font-light leading-relaxed">
+                Protect off-market assets with subtle passcode gates and client NDA verification before unlocking full imagery.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* INTERACTIVE SINGLE-LINK BUILDER ENGINE */}
-      <section id="builder" className="py-24 border-b border-white/10 bg-[#0d0f15]">
-        <div className="max-w-[1400px] mx-auto px-6 space-y-12">
-          <div className="max-w-3xl">
-            <div className="text-xs font-mono text-[#10b981] uppercase tracking-wider mb-2 flex items-center gap-2">
-              <SlidersHorizontal className="w-4 h-4" /> Live EstateLink Simulator
-            </div>
-            <h2 className="text-4xl font-extrabold text-white">Build Your Single Property Link in Seconds</h2>
+      {/* MEMBERSHIP PRICING SECTION */}
+      <section id="membership" className="py-32 border-b border-neutral-900 bg-[#050505]">
+        <div className="max-w-[1300px] mx-auto px-8 space-y-16">
+          <div className="max-w-xl space-y-3">
+            <p className="text-xs font-mono tracking-widest text-neutral-500 uppercase">Membership</p>
+            <h2 className="text-4xl font-normal text-white">Simple, fixed plans for luxury brokerages</h2>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {/* Control Form */}
-            <div className="lg:col-span-5 bg-[#12151c] border border-white/10 p-6 md:p-8 rounded-3xl space-y-6">
-              <div className="space-y-2">
-                <label className="text-xs font-mono text-gray-300">Select Property Preset</label>
-                <div className="grid grid-cols-2 gap-2">
-                  {sampleProperties.map((p) => (
-                    <button
-                      key={p.slug}
-                      onClick={() => {
-                        setPropertyTitle(p.title);
-                        setPropertyPrice(p.price);
-                        setPropertyCity(p.city);
-                        setCustomSlug(p.slug);
-                        setSelectedImage(p.image);
-                      }}
-                      className={`p-2.5 rounded-xl border text-left text-xs font-mono transition-all ${
-                        customSlug === p.slug
-                          ? 'border-[#10b981] bg-[#10b981]/15 text-white'
-                          : 'border-white/10 bg-[#090a0c] text-gray-400 hover:text-white'
-                      }`}
-                    >
-                      {p.city}
-                    </button>
-                  ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
+            {/* Plan 1 */}
+            <div className="bg-neutral-950 border border-neutral-800 p-10 rounded-3xl space-y-8 flex flex-col justify-between">
+              <div className="space-y-6">
+                <div className="flex items-center justify-between border-b border-neutral-900 pb-4">
+                  <span className="text-xs font-mono tracking-widest text-neutral-400 uppercase">SOLO BROKER</span>
+                  <span className="text-xs font-mono text-neutral-500">Up to 10 Listings</span>
                 </div>
+                <div className="text-5xl font-mono font-light text-white">$149 <span className="text-xs font-mono text-neutral-500">/ month</span></div>
+                <p className="text-sm text-neutral-400 font-light">Ideal for independent luxury brokers wanting refined single-link presentations.</p>
               </div>
 
-              <div className="space-y-2">
-                <label className="text-xs font-mono text-gray-300">Property Title</label>
-                <input
-                  type="text"
-                  value={propertyTitle}
-                  onChange={(e) => setPropertyTitle(e.target.value)}
-                  className="w-full bg-[#090a0c] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-[#10b981]"
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label className="text-xs font-mono text-gray-300">Asking Price</label>
-                  <input
-                    type="text"
-                    value={propertyPrice}
-                    onChange={(e) => setPropertyPrice(e.target.value)}
-                    className="w-full bg-[#090a0c] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-[#10b981]"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-xs font-mono text-gray-300">Location City</label>
-                  <input
-                    type="text"
-                    value={propertyCity}
-                    onChange={(e) => setPropertyCity(e.target.value)}
-                    className="w-full bg-[#090a0c] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-[#10b981]"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Live Render Card Output */}
-            <div className="lg:col-span-7 bg-[#12151c] border border-white/15 p-8 rounded-3xl space-y-6 shadow-2xl">
-              <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-xs font-mono text-emerald-400 font-bold">ESTATELINK LIVE VIEWPORT</span>
-                </div>
-
-                <span className="text-xs font-mono text-gray-400">estatelink.co/{customSlug}</span>
-              </div>
-
-              <div style={{ position: 'relative', width: '100%', height: '320px', overflow: 'hidden' }} className="rounded-2xl border border-white/10 group">
-                <img src={selectedImage} alt={propertyTitle} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent pointer-events-none" />
-
-                <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/15 text-xs font-mono text-emerald-400 flex items-center gap-1.5">
-                    <Sparkles className="w-3.5 h-3.5" /> Verified Architectural Presentation
-                  </span>
-                </div>
-
-                <div className="absolute bottom-6 left-6 right-6 space-y-2">
-                  <div className="text-xs font-mono text-emerald-400">{propertyCity}</div>
-                  <h3 className="text-3xl font-extrabold text-white">{propertyTitle}</h3>
-                  <div className="text-2xl font-bold font-mono text-white">{propertyPrice}</div>
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between pt-2">
-                <button
-                  onClick={handleCopyLink}
-                  className="px-6 py-3 bg-[#10b981] hover:bg-[#0ea5e9] text-[#090a0c] font-extrabold text-sm rounded-xl font-mono flex items-center gap-2 transition-all shadow-md"
-                >
-                  {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                  <span>{copied ? 'Copied to Clipboard!' : 'Copy Link for Client Email / WhatsApp'}</span>
-                </button>
-
-                <span className="text-xs font-mono text-gray-400">1-Click Share Ready</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* PRICING MATRIX SECTION */}
-      <section id="pricing" className="py-24 border-b border-white/10">
-        <div className="max-w-[1400px] mx-auto px-6 space-y-12">
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <div className="text-xs font-mono text-[#10b981] uppercase tracking-wider">Transparent Subscriptions</div>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-white">Elevate Your Real Estate Brand</h2>
-            <p className="text-gray-400 text-sm">Choose the tier that matches your luxury portfolio size.</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Solo Broker */}
-            <div className="bg-[#12151c] border border-white/10 p-8 rounded-3xl space-y-6 flex flex-col justify-between">
-              <div className="space-y-4">
-                <div className="text-sm font-mono text-gray-400">SOLO BROKER</div>
-                <div className="text-4xl font-bold text-white font-mono">$79 <span className="text-xs text-gray-400 font-normal">/ month</span></div>
-                <p className="text-xs text-gray-400">For independent agents managing up to 15 active luxury listings.</p>
-
-                <ul className="space-y-3 pt-4 border-t border-white/10 text-xs text-gray-300">
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#10b981]" /> Up to 15 Active EstateLinks</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#10b981]" /> Real-time Buyer Analytics</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#10b981]" /> Instant QR Code Generator</li>
-                </ul>
-              </div>
-
-              <button onClick={() => setTrialModalOpen(true)} className="w-full py-3 bg-white/10 hover:bg-white/20 text-white rounded-xl font-medium text-xs font-mono transition-all">
-                Start Solo Plan
+              <button
+                onClick={() => alert('EstateLink Membership Access Request Sent.')}
+                className="w-full py-4 border border-white/20 text-white font-mono text-xs uppercase tracking-wider rounded-full hover:bg-white hover:text-black transition-all"
+              >
+                Apply for Solo Access
               </button>
             </div>
 
-            {/* Pro Agency (Featured) */}
-            <div className="bg-gradient-to-b from-[#16231e] to-[#12151c] border-2 border-[#10b981] p-8 rounded-3xl space-y-6 flex flex-col justify-between relative shadow-[0_0_40px_rgba(16,185,129,0.25)]">
-              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 bg-[#10b981] text-[#090a0c] text-[10px] font-mono rounded-full uppercase tracking-wider font-extrabold">
-                Recommended for Luxury Teams
+            {/* Plan 2 */}
+            <div className="bg-neutral-950 border-2 border-white p-10 rounded-3xl space-y-8 flex flex-col justify-between">
+              <div className="space-y-6">
+                <div className="flex items-center justify-between border-b border-neutral-900 pb-4">
+                  <span className="text-xs font-mono tracking-widest text-white uppercase font-medium">DEVELOPER & AGENCY</span>
+                  <span className="text-xs font-mono text-white">Unlimited Links</span>
+                </div>
+                <div className="text-5xl font-mono font-light text-white">$499 <span className="text-xs font-mono text-neutral-500">/ month</span></div>
+                <p className="text-sm text-neutral-400 font-light">Custom domain (`link.youragency.com`), passcode gates, and unlimited team seats.</p>
               </div>
 
-              <div className="space-y-4">
-                <div className="text-sm font-mono text-emerald-300">PRO AGENCY</div>
-                <div className="text-4xl font-bold text-white font-mono">$249 <span className="text-xs text-gray-400 font-normal">/ month</span></div>
-                <p className="text-xs text-gray-300">For premier brokerages requiring custom agency domains and team collaboration.</p>
-
-                <ul className="space-y-3 pt-4 border-t border-white/10 text-xs text-gray-200">
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> Unlimited Active EstateLinks</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> Custom Domain (`link.youragency.com`)</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> Passcode Off-Market Protection</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> 10-Seat Team Access</li>
-                </ul>
-              </div>
-
-              <button onClick={() => setTrialModalOpen(true)} className="w-full py-3 bg-[#10b981] hover:bg-[#0ea5e9] text-[#090a0c] font-extrabold text-xs font-mono rounded-xl shadow-lg transition-all">
-                Start Pro Agency Trial
-              </button>
-            </div>
-
-            {/* Enterprise Developer */}
-            <div className="bg-[#12151c] border border-white/10 p-8 rounded-3xl space-y-6 flex flex-col justify-between">
-              <div className="space-y-4">
-                <div className="text-sm font-mono text-gray-400">ENTERPRISE DEVELOPER</div>
-                <div className="text-4xl font-bold text-white font-mono">$699 <span className="text-xs text-gray-400 font-normal">/ month</span></div>
-                <p className="text-xs text-gray-400">For condo & commercial developers requiring custom API integration and white-labeling.</p>
-
-                <ul className="space-y-3 pt-4 border-t border-white/10 text-xs text-gray-300">
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#3b82f6]" /> Custom API & CRM Integration</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#3b82f6]" /> Full White-Label Presentation</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#3b82f6]" /> Dedicated Account Manager</li>
-                </ul>
-              </div>
-
-              <button onClick={() => setTrialModalOpen(true)} className="w-full py-3 bg-white/10 hover:bg-white/20 text-white rounded-xl font-medium text-xs font-mono transition-all">
-                Contact Developer Sales
+              <button
+                onClick={() => alert('EstateLink Agency Membership Request Sent.')}
+                className="w-full py-4 bg-white text-black font-mono text-xs uppercase tracking-wider font-bold rounded-full hover:bg-neutral-200 transition-all"
+              >
+                Apply for Agency Access
               </button>
             </div>
           </div>
         </div>
       </section>
-
-      {/* TRIAL / GENERATE MODAL */}
-      {trialModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-[#12151c] border border-white/20 rounded-3xl p-8 max-w-lg w-full relative space-y-6 shadow-2xl">
-            <button
-              onClick={() => setTrialModalOpen(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
-            <div className="space-y-2">
-              <div className="text-xs font-mono text-[#10b981]">ESTATELINK ENGINE</div>
-              <h3 className="text-2xl font-bold text-white">Generate Your First EstateLink</h3>
-              <p className="text-xs text-gray-400">Start your 14-day free trial. No credit card required.</p>
-            </div>
-
-            <form onSubmit={(e) => { e.preventDefault(); alert('EstateLink generated! Check your email.'); setTrialModalOpen(false); }} className="space-y-4">
-              <div>
-                <label className="text-xs font-mono text-gray-300">Broker / Agency Name</label>
-                <input required type="text" placeholder="Sterling Luxury Real Estate" className="w-full mt-1 bg-[#090a0c] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-[#10b981]" />
-              </div>
-
-              <div>
-                <label className="text-xs font-mono text-gray-300">Work Email</label>
-                <input required type="email" placeholder="sterling@luxurybrokerage.com" className="w-full mt-1 bg-[#090a0c] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-[#10b981]" />
-              </div>
-
-              <button type="submit" className="w-full py-3 bg-[#10b981] hover:bg-[#0ea5e9] text-[#090a0c] font-extrabold text-sm rounded-xl font-mono shadow-lg transition-all">
-                Launch Free 14-Day EstateLink Trial
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
 
       {/* FOOTER */}
-      <footer className="border-t border-white/10 bg-[#090a0c] py-12 text-xs font-mono text-gray-500">
-        <div className="max-w-[1400px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2 text-gray-400">
-            <Link2 className="w-4 h-4 text-[#10b981]" />
-            <span>© 2026 EstateLink Inc. • Compiled by UIOS v2 Design OS Engine</span>
+      <footer className="py-12 bg-black text-xs font-mono text-neutral-600 border-t border-neutral-900">
+        <div className="max-w-[1300px] mx-auto px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-3 text-neutral-400">
+            <span className="font-serif italic text-lg text-white">EstateLink</span>
+            <span>© 2026 EstateLink • Editorial Architecture Edition</span>
           </div>
 
-          <div className="flex items-center gap-6">
-            <Link href="/real-estate-saas" className="hover:text-white transition-colors">Aetheris SaaS</Link>
-            <Link href="/real-estate-designjoy" className="hover:text-white transition-colors">EstateJoy</Link>
+          <div className="flex items-center gap-8">
             <Link href="/" className="hover:text-white transition-colors">UIOS Studio</Link>
+            <Link href="/real-estate-saas" className="hover:text-white transition-colors">SaaS Demo</Link>
+            <Link href="https://github.com/scream687/uios" target="_blank" className="hover:text-white transition-colors">GitHub</Link>
           </div>
         </div>
       </footer>
