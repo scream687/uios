@@ -3,6 +3,7 @@ import assert from 'node:assert';
 import {
   RuntimeKernel,
   ConstraintSolverEngine,
+  calculateFingerprint,
   type Engine,
   type BaseArtifact,
   type ValidationResult,
@@ -41,19 +42,24 @@ class TestIntentEngine implements Engine<IntentInputArtifact, ProjectOutputArtif
   public async execute(input: IntentInputArtifact, context: ExecutionContext): Promise<ProjectOutputArtifact> {
     context.logger(`Executing IntentEngine for prompt: ${input.payload.prompt}`);
 
+    const payload = {
+      domain: 'real-estate',
+      brandName: 'EstateLink',
+      accentColor: '#e2ff00',
+    };
+
     return {
       id: 'project_artifact_v1',
       type: 'project',
       version: 1,
+      schemaVersion: 1,
+      fingerprint: calculateFingerprint(payload, [input.id]),
+      parentFingerprint: input.fingerprint,
       owner: 'IntentEngine',
-      contentHash: 'sha256:project_v1_hash',
       createdAt: new Date().toISOString(),
+      inputs: [input.id],
       provenance: [input.id],
-      payload: {
-        domain: 'real-estate',
-        brandName: 'EstateLink',
-        accentColor: '#e2ff00',
-      },
+      payload,
     };
   }
 
@@ -68,25 +74,28 @@ test('Vertical Slice: OS RuntimeKernel Execution, Immutability & EventBus Pub/Su
 
   kernel.registerEngine(intentEngine);
 
-  const stateChanges: string[] = [];
-  kernel.eventBus.on('engine:stateChange', (evt) => {
-    stateChanges.push(`${evt.engineId}:${evt.state}`);
+  const engineStartedEvents: string[] = [];
+  kernel.eventBus.subscribe('EngineStarted', (evt) => {
+    engineStartedEvents.push(evt.engineId);
   });
 
   let artifactCreatedNotification = false;
-  kernel.eventBus.on('artifact:created', () => {
+  kernel.eventBus.subscribe('ArtifactCreated', () => {
     artifactCreatedNotification = true;
   });
 
+  const payload = { prompt: 'Build luxury real estate platform EstateLink' };
   const inputArtifact: IntentInputArtifact = {
     id: 'user_prompt_v1',
     type: 'intent',
     version: 1,
+    schemaVersion: 1,
+    fingerprint: calculateFingerprint(payload),
     owner: 'User',
-    contentHash: 'sha256:prompt_v1_hash',
     createdAt: new Date().toISOString(),
+    inputs: [],
     provenance: [],
-    payload: { prompt: 'Build luxury real estate platform EstateLink' },
+    payload,
   };
 
   const output = await kernel.executeEngine<IntentInputArtifact, ProjectOutputArtifact>(
@@ -98,7 +107,7 @@ test('Vertical Slice: OS RuntimeKernel Execution, Immutability & EventBus Pub/Su
   assert.strictEqual(output.payload.brandName, 'EstateLink');
   assert.strictEqual(kernel.getEngineState('IntentEngine'), 'Succeeded');
   assert.strictEqual(artifactCreatedNotification, true);
-  assert.deepStrictEqual(stateChanges, ['IntentEngine:Running', 'IntentEngine:Succeeded']);
+  assert.deepStrictEqual(engineStartedEvents, ['IntentEngine']);
 
   // Immutability Check: Store latest version and verify history tracking
   const history = kernel.artifactStore.getHistory('project_artifact_v1');
@@ -128,6 +137,6 @@ test('Vertical Slice: ConstraintSolverEngine solves multi-dimensional HARD/SOFT/
   assert.strictEqual(result.resolved['typography:tracking'], '-0.045em');
 
   // Verify decision provenance tracing
-  assert.match(result.provenanceTrace['accessibility:minContrastRatio'], /Enforced HARD constraint/);
-  assert.match(result.provenanceTrace['spacing:paddingY'], /Resolved SOFT constraint from LuxurySkill/);
+  assert.match(result.explanations['accessibility:minContrastRatio'].winningSource, /AccessibilitySkill/);
+  assert.match(result.explanations['spacing:paddingY'].winningSource, /LuxurySkill/);
 });
