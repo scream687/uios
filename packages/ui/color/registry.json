@@ -1,0 +1,11 @@
+{
+  "moduleId": "color",
+  "version": "2.0.0",
+  "capabilities": ["color-synthesis", "palette-generation", "contrast-audit", "semantic-tokens"],
+  "dependencies": ["layout", "typography"],
+  "supportedDomains": ["Coffee", "Luxury Real Estate", "SaaS", "Law", "Architecture", "Medical", "Dining"],
+  "supportedBrands": ["Luxury", "Minimalist", "Developer Dark", "Editorial"],
+  "priority": 40,
+  "outputArtifacts": ["color.json"],
+  "requiredArtifacts": ["design_context.json", "typography.json"]
+}

@@ -1,0 +1,11 @@
+{
+  "moduleId": "motion",
+  "version": "2.0.0",
+  "capabilities": ["motion-synthesis", "gsap-choreography", "scroll-trigger", "spring-physics"],
+  "dependencies": ["layout", "typography"],
+  "supportedDomains": ["Coffee", "Luxury Real Estate", "SaaS", "Law", "Architecture", "Medical", "Dining"],
+  "supportedBrands": ["Luxury", "Minimalist", "Developer Dark", "Editorial"],
+  "priority": 50,
+  "outputArtifacts": ["motion.json"],
+  "requiredArtifacts": ["layout.json", "typography.json"]
+}

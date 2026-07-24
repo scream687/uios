@@ -1,0 +1,11 @@
+{
+  "moduleId": "typography",
+  "version": "2.0.0",
+  "capabilities": ["typography-synthesis", "font-pairing", "optical-tracking", "readability-audit"],
+  "dependencies": ["layout"],
+  "supportedDomains": ["Coffee", "Luxury Real Estate", "SaaS", "Law", "Architecture", "Medical", "Dining"],
+  "supportedBrands": ["Luxury", "Minimalist", "Developer Dark", "Editorial"],
+  "priority": 30,
+  "outputArtifacts": ["typography.json"],
+  "requiredArtifacts": ["design_context.json", "layout.json"]
+}
