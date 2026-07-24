@@ -23,7 +23,9 @@ export * from './ui/registry.js';
 export * from './ui/orchestrator.js';
 export * from './ui/dim.js';
 export * from './v4/index.js';
+export * from './v6/index.js';
 export * from './creative/index.js';
+
 
 
 
