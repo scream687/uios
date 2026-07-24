@@ -1,0 +1,15 @@
+{
+  "module": "typography",
+  "principles": [
+    {
+      "id": "TP_01",
+      "name": "Optical Tracking Contrast",
+      "heuristic": "Display titles >= 48px MUST use negative tracking (-0.03em to -0.05em). Small pill metadata caps <= 12px MUST use positive tracking (+0.12em to +0.18em)."
+    },
+    {
+      "id": "TP_02",
+      "name": "Optimal Character Measure",
+      "heuristic": "Body text line length MUST be constrained between 45 and 75 characters per line to optimize visual reading velocity."
+    }
+  ]
+}

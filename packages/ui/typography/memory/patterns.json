@@ -1,0 +1,12 @@
+{
+  "module": "typography",
+  "learnedPatterns": [
+    {
+      "patternId": "TP_PAT_01",
+      "name": "Playfair Display + Inter",
+      "confidence": 0.94,
+      "successRate": 0.96,
+      "domain": "Coffee"
+    }
+  ]
+}
