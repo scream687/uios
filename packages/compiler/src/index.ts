@@ -16,5 +16,7 @@ export * from './slop/index.js';
 export * from './scene/index.js';
 export * from './taste/index.js';
 export * from './taste/visual-analyzer.js';
+export * from './taste/semantic-saliency.js';
 export * from './creative/index.js';
+
 
