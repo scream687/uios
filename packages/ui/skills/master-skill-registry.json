@@ -1,0 +1,20 @@
+{
+  "registryVersion": "1.0.0",
+  "skills": [
+    {
+      "id": "anti-slop-frontend",
+      "path": "packages/ui/skills/anti-slop-frontend/SKILL.md",
+      "description": "Anti-slop frontend skill for landing pages, portfolios, and redesigns. Reads the brief, sets the 3 dials, infers design system, and eliminates AI defaults."
+    },
+    {
+      "id": "impeccable-craftsmanship",
+      "path": "packages/ui/skills/impeccable-craftsmanship/SKILL.md",
+      "description": "Impeccable UI craftsmanship skill defining optical typography tracking, whitespace rhythm, contrast thresholds, and layout tension."
+    },
+    {
+      "id": "ui-ux-pro-max",
+      "path": "packages/ui/skills/ui-ux-pro-max/SKILL.md",
+      "description": "UI/UX Pro Max skill defining industry-specific design stacks, color palettes, component blueprints, and design tokens for SaaS, E-Commerce, DevTools, and Portfolios."
+    }
+  ]
+}
