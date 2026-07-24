@@ -18,7 +18,9 @@ export * from './taste/index.js';
 export * from './taste/visual-analyzer.js';
 export * from './taste/semantic-saliency.js';
 export * from './laboratory/index.js';
+export * from './v4/index.js';
 export * from './creative/index.js';
+
 
 
 
