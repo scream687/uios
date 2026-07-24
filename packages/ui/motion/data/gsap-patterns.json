@@ -1,0 +1,22 @@
+{
+  "motionProfiles": [
+    {
+      "name": "Luxury Spring Physics",
+      "durationFastMs": 150,
+      "durationNormalMs": 250,
+      "durationSlowMs": 450,
+      "easing": "cubic-bezier(0.16, 1, 0.3, 1)",
+      "scrollTrigger": true,
+      "staggerDelayMs": 50
+    },
+    {
+      "name": "Kinetic Scroll Snap",
+      "durationFastMs": 100,
+      "durationNormalMs": 200,
+      "durationSlowMs": 350,
+      "easing": "cubic-bezier(0.25, 1, 0.5, 1)",
+      "scrollTrigger": true,
+      "staggerDelayMs": 30
+    }
+  ]
+}

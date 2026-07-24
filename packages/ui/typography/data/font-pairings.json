@@ -1,0 +1,31 @@
+{
+  "pairings": [
+    {
+      "archetype": "Luxury Editorial",
+      "displayFont": "Playfair Display",
+      "bodyFont": "Inter",
+      "trackingHeading": "-0.03em",
+      "trackingBody": "0em",
+      "lineHeightHeading": "1.05",
+      "lineHeightBody": "1.6"
+    },
+    {
+      "archetype": "Swiss Minimalist",
+      "displayFont": "Neue Haas Grotesk",
+      "bodyFont": "Inter",
+      "trackingHeading": "-0.04em",
+      "trackingBody": "-0.01em",
+      "lineHeightHeading": "0.95",
+      "lineHeightBody": "1.5"
+    },
+    {
+      "archetype": "Developer Dark",
+      "displayFont": "JetBrains Mono",
+      "bodyFont": "Inter",
+      "trackingHeading": "-0.02em",
+      "trackingBody": "0em",
+      "lineHeightHeading": "1.1",
+      "lineHeightBody": "1.65"
+    }
+  ]
+}

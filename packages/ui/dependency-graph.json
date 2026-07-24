@@ -1,0 +1,18 @@
+{
+  "$schema": "https://uios.dev/schemas/ui-dependency-graph.schema.json",
+  "resolutionOrder": [
+    "composition",
+    "layout",
+    "typography",
+    "color",
+    "motion",
+    "accessibility"
+  ],
+  "dependencies": {
+    "layout": ["composition"],
+    "typography": ["layout"],
+    "color": ["layout", "typography"],
+    "motion": ["layout", "typography"],
+    "accessibility": ["color", "typography", "layout"]
+  }
+}

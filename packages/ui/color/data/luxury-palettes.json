@@ -1,0 +1,24 @@
+{
+  "palettes": [
+    {
+      "name": "Volcanic Dark",
+      "background": "#0A0A0B",
+      "surface": "#121214",
+      "primary": "#FF4500",
+      "accent": "#D4A373",
+      "text": "#FDFBF7",
+      "muted": "#71717A",
+      "contrastRatio": 7.2
+    },
+    {
+      "name": "Architectural Cream",
+      "background": "#FDFBF7",
+      "surface": "#F4F1EA",
+      "primary": "#1A1A1A",
+      "accent": "#B8860B",
+      "text": "#0F0F0F",
+      "muted": "#666666",
+      "contrastRatio": 14.5
+    }
+  ]
+}
