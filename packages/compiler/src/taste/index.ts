@@ -97,7 +97,6 @@ export class TasteEnforcer {
 
 export class UIUXProMaxEngine {
   public applyProMaxRules(tokens: BrandTokens): BrandTokens {
-    // Enforce Pro Max UI/UX rules: optical balance, HSL harmony, responsive breakpoints
     return {
       ...tokens,
       colors: {
@@ -123,7 +122,6 @@ export class ImpeccableCriticBoard {
   }
 
   public autoFix(ast: DesignAST): void {
-    // Auto-remediate AST violations
     ast.traverse((node: DesignASTNode) => {
       if (node.metadata.accessibility) {
         node.metadata.accessibility.keyboardFocusable = true;
@@ -136,5 +134,82 @@ export class ImpeccableCriticBoard {
         }
       }
     });
+  }
+}
+
+export interface AITellAuditResult {
+  tasteScore: number; // 0 - 100 (90+ required for Awwwards / Senior Designer Handcrafted status)
+  passed: boolean;
+  detectedAITells: Array<{
+    tell: string;
+    severity: 'critical' | 'high' | 'medium';
+    reason: string;
+  }>;
+  creativeDirectives: string[];
+}
+
+export class TasteEngine {
+  public auditDesignForAITells(ast: Record<string, any>): AITellAuditResult {
+    const detectedAITells: Array<{
+      tell: string;
+      severity: 'critical' | 'high' | 'medium';
+      reason: string;
+    }> = [];
+
+    if ((ast.cardGridCount || 0) > 2) {
+      detectedAITells.push({
+        tell: 'Repetitive Card Grid Syndrome',
+        severity: 'critical',
+        reason: 'Layout relies on repeated card grids. Replace boxes with unbordered editorial text, full-bleed images, and fluid asymmetrical spans.',
+      });
+    }
+
+    if (ast.uniformSectionDensity) {
+      detectedAITells.push({
+        tell: 'Monotonous Section Pacing',
+        severity: 'high',
+        reason: 'Section heights and padding are uniform. Create extreme rhythm contrast (100vh Hero vs 30vh Narrow Editorial vs Full-Bleed Monolith).',
+      });
+    }
+
+    if (!ast.dominantFocalObject) {
+      detectedAITells.push({
+        tell: 'Missing Visual Focal Point',
+        severity: 'critical',
+        reason: 'Page lacks a single unforgettable visual hero object. Introduce a 3D Volcanic Monolith or Cinematic Product Viewport.',
+      });
+    }
+
+    if ((ast.borderedContainerCount || 0) > 4) {
+      detectedAITells.push({
+        tell: 'Border Container Overuse',
+        severity: 'high',
+        reason: 'Overuse of 1px bordered containers signals template assembly. Eliminate container borders and use spatial whitespace.',
+      });
+    }
+
+    if (!ast.emotionalJourney) {
+      detectedAITells.push({
+        tell: 'Weak Emotional Pacing',
+        severity: 'medium',
+        reason: 'Layout presents information linearly without emotional pacing (Arrival -> Discovery -> Craft -> Proof -> Desire -> Purchase).',
+      });
+    }
+
+    const totalLoss = detectedAITells.reduce((acc, t) => {
+      if (t.severity === 'critical') return acc + 25;
+      if (t.severity === 'high') return acc + 15;
+      return acc + 10;
+    }, 0);
+
+    const tasteScore = Math.max(0, 100 - totalLoss);
+    const passed = tasteScore >= 85;
+
+    return {
+      tasteScore,
+      passed,
+      detectedAITells,
+      creativeDirectives: detectedAITells.map(t => t.reason),
+    };
   }
 }
