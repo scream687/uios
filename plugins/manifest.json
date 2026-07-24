@@ -1,0 +1,21 @@
+{
+  "name": "UIOS Plugin Marketplace Manifest",
+  "version": "3.0.0",
+  "installedPlugins": [
+    {
+      "id": "ecc",
+      "name": "Everything-as-Code / Everything Context (ECC)",
+      "repository": "https://github.com/affaan-m/ECC",
+      "status": "active",
+      "installedAt": "2026-07-25T00:54:00Z",
+      "path": "plugins/ecc",
+      "capabilities": [
+        "context-engineering",
+        "coding-standards",
+        "agent-rules",
+        "multi-llm-harness",
+        "architecture-governance"
+      ]
+    }
+  ]
+}
