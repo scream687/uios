@@ -10,4 +10,6 @@ export * from './taste/index.js';
 export * from './tie/index.js';
 export * from './v2/index.js';
 export * from './protocol/index.js';
+export * from './benchmark/index.js';
+
 
