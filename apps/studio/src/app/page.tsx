@@ -116,6 +116,58 @@ export default function UIOSStudioDashboard() {
               onSelect={(id) => setSelectedCandidateId(id)}
             />
 
+            {/* v9 ADIP Metrics & Execution Telemetry */}
+            {pipelineData.uiMetrics && (
+              <div className="bg-[#0f1115] border border-[#FF4500]/30 rounded-xl p-5 shadow-2xl font-mono text-xs">
+                <div className="flex justify-between items-center mb-4 pb-2 border-b border-white/10">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#FF4500] animate-pulse" />
+                    <span className="font-bold text-white uppercase tracking-wider text-sm">v9 ADIP Execution Metrics & Trace</span>
+                  </div>
+                  <span className="text-[#8a99ff] bg-[#5e6ad2]/20 px-2.5 py-1 rounded border border-[#5e6ad2]/30">
+                    Strategy: {pipelineData.strategy?.strategyName || 'Luxury Editorial'}
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 md:grid-cols-6 gap-4 mb-4">
+                  <div className="p-3 bg-black/40 border border-white/10 rounded-lg">
+                    <div className="text-gray-400">Visual Balance</div>
+                    <div className="text-lg font-bold text-emerald-400">{pipelineData.uiMetrics.visualBalance * 100}%</div>
+                  </div>
+                  <div className="p-3 bg-black/40 border border-white/10 rounded-lg">
+                    <div className="text-gray-400">Hierarchy Strength</div>
+                    <div className="text-lg font-bold text-emerald-400">{pipelineData.uiMetrics.hierarchyStrength * 100}%</div>
+                  </div>
+                  <div className="p-3 bg-black/40 border border-white/10 rounded-lg">
+                    <div className="text-gray-400">Reading Flow</div>
+                    <div className="text-lg font-bold text-emerald-400">{pipelineData.uiMetrics.readingFlow * 100}%</div>
+                  </div>
+                  <div className="p-3 bg-black/40 border border-white/10 rounded-lg">
+                    <div className="text-gray-400">WCAG Contrast Ratio</div>
+                    <div className="text-lg font-bold text-amber-400">{pipelineData.uiMetrics.contrastRatio}:1</div>
+                  </div>
+                  <div className="p-3 bg-black/40 border border-white/10 rounded-lg">
+                    <div className="text-gray-400">Est. Layout Shift (CLS)</div>
+                    <div className="text-lg font-bold text-blue-400">{pipelineData.uiMetrics.estimatedCLS}</div>
+                  </div>
+                  <div className="p-3 bg-black/40 border border-white/10 rounded-lg">
+                    <div className="text-gray-400">Est. Hero Load (LCP)</div>
+                    <div className="text-lg font-bold text-[#FF4500]">{pipelineData.uiMetrics.estimatedLCPSeconds}s</div>
+                  </div>
+                </div>
+
+                {pipelineData.dna && (
+                  <div className="flex flex-wrap gap-2 pt-2 text-[11px] text-gray-400 border-t border-white/5">
+                    <span>Design DNA:</span>
+                    <span className="text-white font-bold">{pipelineData.dna.rhythm} Rhythm</span> •
+                    <span className="text-white font-bold">{pipelineData.dna.density} Density</span> •
+                    <span className="text-white font-bold">{pipelineData.dna.contrast} Contrast</span> •
+                    <span className="text-white font-bold">{pipelineData.dna.composition} Composition</span>
+                  </div>
+                )}
+              </div>
+            )}
+
             {/* Layer 1 & 2: Spec Viewer & AST Explorer */}
             <DesignSpecViewer spec={pipelineData.spec} astRoot={activeCandidate?.ast?.root} />
 

@@ -7,6 +7,12 @@ import {
   MultiTargetEmitter,
   EmissionTarget,
   EmitterOutput,
+  AdaptiveStrategyEngine,
+  MetricsEngine,
+  RuntimeTelemetryEngine,
+  CapabilityKernelEngine,
+  DesignDNAManager,
+  IntentGraphExtractor,
 } from '@uios/compiler';
 import { InspirationEngine, DesignKnowledgeGraph, UXLawsEngine } from '@uios/knowledge';
 import { IndependentDesignCritic } from '@uios/critics';
@@ -22,6 +28,23 @@ export async function POST(request: Request) {
     // Layer 1: Design Spec Parser
     const specParser = new DesignSpecParser();
     const spec = specParser.parse(prompt);
+
+    // v9 ADIP Platform Engines
+    const intentExtractor = new IntentGraphExtractor();
+    const intentGraph = intentExtractor.extractIntent(prompt);
+
+    const dnaManager = new DesignDNAManager();
+    const { dna, genome } = dnaManager.synthesizeDNA(intentGraph);
+
+    const strategyEngine = new AdaptiveStrategyEngine();
+    const strategy = strategyEngine.selectStrategy({ domain: spec.project.name || 'SaaS', primaryGoal: 'Conversion' });
+
+    const capabilityKernel = new CapabilityKernelEngine();
+    const resolvedCapabilities = [
+      capabilityKernel.resolveCapability('typography.selection'),
+      capabilityKernel.resolveCapability('color.palette'),
+      capabilityKernel.resolveCapability('motion.physics'),
+    ];
 
     // Layer 10: Multi-Candidate AST Generator
     const candidateGenerator = new MultiCandidateGenerator();
@@ -43,6 +66,17 @@ export async function POST(request: Request) {
     // Layer 7, 11, 15, 16: Independent Critic, Smell Detector, Review Board
     const critic = new IndependentDesignCritic();
     const criticReport = critic.evaluate(selectedCandidate.ast, 'code sample');
+
+    // v9 Metrics & Telemetry
+    const metricsEngine = new MetricsEngine();
+    const uiMetrics = metricsEngine.calculateMetrics(selectedCandidate.ast);
+
+    const telemetryEngine = new RuntimeTelemetryEngine();
+    const executionTrace = telemetryEngine.recordTrace({
+      strategy: strategy.strategyName,
+      modules: ['typography', 'color', 'motion'],
+      capabilities: ['typography.selection', 'color.palette', 'motion.physics'],
+    });
 
     // Layer 8: Inspiration Engine
     const inspirationEngine = new InspirationEngine();
@@ -75,12 +109,19 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       spec,
+      intentGraph,
+      dna,
+      genome,
+      strategy,
+      resolvedCapabilities,
       candidates,
       selectedCandidate,
       constraintViolations,
       tokens,
       motionDecl,
       criticReport,
+      uiMetrics,
+      executionTrace,
       linearPrinciples,
       uxLawResults,
       renderingStrategy,
