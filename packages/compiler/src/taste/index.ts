@@ -1,5 +1,8 @@
 import { DesignAST, DesignASTNode } from '../ast/index.js';
 import { BrandTokens } from '../memory/dna.js';
+import { ASTLayoutAnalyzer, DerivedLayoutMetrics } from './analyzer.js';
+
+export * from './analyzer.js';
 
 export interface TasteAuditResult {
   score: number; // 0 to 100 Impeccable Taste Score
@@ -85,12 +88,7 @@ export class TasteEnforcer {
       antiSlopPassed: totalScore >= 90 && violations.length === 0,
       violations,
       criticEvaluations,
-      recommendations: [
-        ...recommendations,
-        'Maintain negative letter-spacing (-0.04em) on display headlines above 48px.',
-        'Ensure subtle 1px hairline border on dark card surfaces for crisp separation.',
-        'Apply 150ms cubic-bezier transition curves on all interactive hover states.',
-      ],
+      recommendations,
     };
   }
 }
@@ -126,20 +124,14 @@ export class ImpeccableCriticBoard {
       if (node.metadata.accessibility) {
         node.metadata.accessibility.keyboardFocusable = true;
       }
-      if (node.metadata.motion) {
-        if (node.metadata.motion.type === 'none') {
-          node.metadata.motion.type = 'stagger-fade-up';
-          node.metadata.motion.durationMs = 200;
-          node.metadata.motion.easing = 'cubic-bezier(0.16, 1, 0.3, 1)';
-        }
-      }
     });
   }
 }
 
 export interface AITellAuditResult {
-  tasteScore: number; // 0 - 100 (90+ required for Awwwards / Senior Designer Handcrafted status)
+  tasteScore: number;
   passed: boolean;
+  derivedMetrics: DerivedLayoutMetrics;
   detectedAITells: Array<{
     tell: string;
     severity: 'critical' | 'high' | 'medium';
@@ -149,50 +141,46 @@ export interface AITellAuditResult {
 }
 
 export class TasteEngine {
-  public auditDesignForAITells(ast: Record<string, any>): AITellAuditResult {
+  private analyzer = new ASTLayoutAnalyzer();
+
+  public auditDesignForAITells(ast: DesignAST | Record<string, any>): AITellAuditResult {
+    // DERIVE METRICS PROGRAMMATICALLY FROM AST (NO HARDCODED BOOLEANS)
+    const metrics = this.analyzer.analyzeAST(ast);
     const detectedAITells: Array<{
       tell: string;
       severity: 'critical' | 'high' | 'medium';
       reason: string;
     }> = [];
 
-    if ((ast.cardGridCount || 0) > 2) {
+    if (metrics.cardGridCount > 2 || metrics.rectangleCount > 5) {
       detectedAITells.push({
         tell: 'Repetitive Card Grid Syndrome',
         severity: 'critical',
-        reason: 'Layout relies on repeated card grids. Replace boxes with unbordered editorial text, full-bleed images, and fluid asymmetrical spans.',
+        reason: `Derived ${metrics.rectangleCount} bordered rectangles. Replace box grid with unbordered editorial text and fluid asymmetrical spans.`,
       });
     }
 
-    if (ast.uniformSectionDensity) {
+    if (metrics.uniformSectionDensity) {
       detectedAITells.push({
         tell: 'Monotonous Section Pacing',
         severity: 'high',
-        reason: 'Section heights and padding are uniform. Create extreme rhythm contrast (100vh Hero vs 30vh Narrow Editorial vs Full-Bleed Monolith).',
+        reason: `Section height variance is low (${metrics.sectionHeightVariance}). Create extreme rhythm contrast (100vh Hero -> 35vh Text -> Monolith).`,
       });
     }
 
-    if (!ast.dominantFocalObject) {
+    if (!metrics.hasDominantHeroObject) {
       detectedAITells.push({
         tell: 'Missing Visual Focal Point',
         severity: 'critical',
-        reason: 'Page lacks a single unforgettable visual hero object. Introduce a 3D Volcanic Monolith or Cinematic Product Viewport.',
+        reason: 'AST hero node height < 80vh. Introduce a 3D Volcanic Monolith or Cinematic Viewport.',
       });
     }
 
-    if ((ast.borderedContainerCount || 0) > 4) {
-      detectedAITells.push({
-        tell: 'Border Container Overuse',
-        severity: 'high',
-        reason: 'Overuse of 1px bordered containers signals template assembly. Eliminate container borders and use spatial whitespace.',
-      });
-    }
-
-    if (!ast.emotionalJourney) {
+    if (!metrics.hasEmotionalJourney) {
       detectedAITells.push({
         tell: 'Weak Emotional Pacing',
         severity: 'medium',
-        reason: 'Layout presents information linearly without emotional pacing (Arrival -> Discovery -> Craft -> Proof -> Desire -> Purchase).',
+        reason: `Scene count (${metrics.sceneCount}) lacks emotional contrast pacing.`,
       });
     }
 
@@ -208,6 +196,7 @@ export class TasteEngine {
     return {
       tasteScore,
       passed,
+      derivedMetrics: metrics,
       detectedAITells,
       creativeDirectives: detectedAITells.map(t => t.reason),
     };
