@@ -10,7 +10,9 @@ export * from './tie/index.js';
 export * from './v2/index.js';
 export * from './protocol/index.js';
 export * from './benchmark/index.js';
+export * from './benchmark/evidence.js';
 export * from './slop/index.js';
+
 export * from './scene/index.js';
 export * from './taste/index.js';
 export * from './creative/index.js';
