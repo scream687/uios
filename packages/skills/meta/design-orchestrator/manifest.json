@@ -1,0 +1,25 @@
+{
+  "id": "design-orchestrator",
+  "version": "1.0.0",
+  "category": "meta",
+  "name": "Design Orchestrator",
+  "description": "Meta-skill orchestrating multi-candidate AST synthesis and review board execution.",
+  "priority": 100,
+  "confidence": 0.99,
+  "stage": "orchestration",
+  "parallelizable": false,
+  "dependencies": [],
+  "supports": [
+    "landing-page",
+    "dashboard",
+    "crm"
+  ],
+  "capabilities": [
+    "orchestration",
+    "meta-planning"
+  ],
+  "libraries": [],
+  "estimatedTimeMs": 300,
+  "costUnits": 5,
+  "qualityWeight": 10
+}

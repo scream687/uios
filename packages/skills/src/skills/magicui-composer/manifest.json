@@ -1,0 +1,20 @@
+{
+  "id": "magicui-composer",
+  "name": "Magic UI Composer",
+  "purpose": "High impact marketing effects: spotlight lighting, animated typography, particle beams.",
+  "priority": 4,
+  "confidence": 0.96,
+  "supported_tasks": [
+    "Spotlight Hero",
+    "Animated Typography",
+    "Shimmer Border"
+  ],
+  "dependencies": [
+    "motion-director"
+  ],
+  "compatible_libraries": [
+    "Magic UI",
+    "Framer Motion"
+  ],
+  "quality_score": 96
+}

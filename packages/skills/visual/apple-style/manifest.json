@@ -1,0 +1,35 @@
+{
+  "id": "apple-style",
+  "version": "1.0.0",
+  "category": "visual",
+  "name": "Apple Style Compiler",
+  "description": "Apple design language compiler enforcing Frost light gray canvas (#f5f5f7), Apple Blue (#0071e3) filled action pills paired with Link Blue (#0066cc) outlined secondary actions, SF Pro typography with proportional negative tracking, full-bleed product hero layouts, and shadowless hairline surface shifts.",
+  "priority": 95,
+  "confidence": 0.99,
+  "stage": "visual",
+  "parallelizable": true,
+  "dependencies": [
+    "brand-dna"
+  ],
+  "supports": [
+    "landing-page",
+    "dashboard",
+    "crm",
+    "e-commerce",
+    "portfolio"
+  ],
+  "capabilities": [
+    "apple-blue-action",
+    "sf-pro-tracking",
+    "full-bleed-heroes",
+    "dual-radius-system",
+    "shadowless-surface-shifts"
+  ],
+  "libraries": [
+    "shadcn",
+    "21st.dev"
+  ],
+  "estimatedTimeMs": 100,
+  "costUnits": 1,
+  "qualityWeight": 9.9
+}

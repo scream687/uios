@@ -1,0 +1,31 @@
+{
+  "id": "project-design-initializer",
+  "version": "1.0.0",
+  "category": "meta",
+  "name": "Project Design Initializer",
+  "description": "Master project onboarding skill that evaluates user prompts, asks targeted design tree questions, and generates a formal, production-ready design.md specification for any new web project before code compilation.",
+  "priority": 110,
+  "confidence": 1.0,
+  "stage": "planning",
+  "parallelizable": false,
+  "dependencies": [],
+  "supports": [
+    "landing-page",
+    "dashboard",
+    "crm",
+    "e-commerce",
+    "portfolio",
+    "saas"
+  ],
+  "capabilities": [
+    "project-initialization",
+    "user-interview",
+    "design-md-generation",
+    "archetype-selection",
+    "token-mapping"
+  ],
+  "libraries": [],
+  "estimatedTimeMs": 150,
+  "costUnits": 2,
+  "qualityWeight": 10.0
+}

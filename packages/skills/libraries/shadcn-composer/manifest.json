@@ -1,0 +1,29 @@
+{
+  "id": "shadcn-composer",
+  "version": "1.0.0",
+  "category": "libraries",
+  "name": "shadcn/ui Composer",
+  "description": "Compose accessible Radix primitives with CVA and Tailwind CSS.",
+  "priority": 88,
+  "confidence": 0.97,
+  "stage": "ast",
+  "parallelizable": true,
+  "dependencies": [],
+  "supports": [
+    "landing-page",
+    "dashboard",
+    "crm"
+  ],
+  "capabilities": [
+    "primitives",
+    "accessible-forms",
+    "cards"
+  ],
+  "libraries": [
+    "shadcn",
+    "Radix UI"
+  ],
+  "estimatedTimeMs": 110,
+  "costUnits": 2,
+  "qualityWeight": 9.7
+}

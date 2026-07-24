@@ -1,0 +1,17 @@
+{
+  "id": "accessibility-auditor",
+  "name": "Accessibility Auditor",
+  "purpose": "Audit WCAG AA compliance, contrast ratios, focus visible rings, and ARIA landmarks.",
+  "priority": 5,
+  "confidence": 0.99,
+  "supported_tasks": [
+    "WCAG AA Audit",
+    "Keyboard Navigation",
+    "ARIA Landmarks"
+  ],
+  "dependencies": [],
+  "compatible_libraries": [
+    "Radix UI"
+  ],
+  "quality_score": 99
+}

@@ -1,0 +1,35 @@
+{
+  "id": "awesomic-style",
+  "version": "1.0.0",
+  "category": "visual",
+  "name": "Awesomic Style Compiler",
+  "description": "Editorial zinc grid visual compiler enforcing Cosmica geometric display typography, hairline cloud borders, 36px card geometry, and confetti-orange ember punctuation.",
+  "priority": 95,
+  "confidence": 0.99,
+  "stage": "visual",
+  "parallelizable": true,
+  "dependencies": [
+    "brand-dna"
+  ],
+  "supports": [
+    "landing-page",
+    "dashboard",
+    "crm",
+    "e-commerce",
+    "portfolio"
+  ],
+  "capabilities": [
+    "editorial-zinc",
+    "cosmica-typography",
+    "ember-accents",
+    "hairline-elevation",
+    "rounded-36px-geometry"
+  ],
+  "libraries": [
+    "shadcn",
+    "21st.dev"
+  ],
+  "estimatedTimeMs": 100,
+  "costUnits": 1,
+  "qualityWeight": 9.9
+}

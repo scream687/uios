@@ -1,0 +1,26 @@
+{
+  "id": "brand-dna",
+  "version": "1.0.0",
+  "category": "visual",
+  "name": "Brand DNA",
+  "description": "Synthesize brand archetypes (Linear Dark, Apple Minimal, Stripe SaaS) and color harmonies.",
+  "priority": 90,
+  "confidence": 0.99,
+  "stage": "visual",
+  "parallelizable": false,
+  "dependencies": [],
+  "supports": [
+    "landing-page",
+    "dashboard",
+    "crm"
+  ],
+  "capabilities": [
+    "tokens",
+    "brand-personality",
+    "color-harmony"
+  ],
+  "libraries": [],
+  "estimatedTimeMs": 90,
+  "costUnits": 1,
+  "qualityWeight": 9.9
+}

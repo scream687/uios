@@ -1,0 +1,19 @@
+{
+  "id": "layout-architect",
+  "name": "Layout Architect",
+  "purpose": "Grid system, container bounds, fluid spacing scale, and breakpoint management.",
+  "priority": 2,
+  "confidence": 0.97,
+  "supported_tasks": [
+    "Grid System",
+    "Fluid Spacing",
+    "Responsive Layout"
+  ],
+  "dependencies": [
+    "page-planner"
+  ],
+  "compatible_libraries": [
+    "Tailwind CSS"
+  ],
+  "quality_score": 97
+}

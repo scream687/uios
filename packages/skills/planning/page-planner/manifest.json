@@ -1,0 +1,28 @@
+{
+  "id": "page-planner",
+  "version": "1.0.0",
+  "category": "planning",
+  "name": "Page Planner",
+  "description": "High level page narrative structure, section order, and information architecture flow.",
+  "priority": 100,
+  "confidence": 0.98,
+  "stage": "planning",
+  "parallelizable": false,
+  "dependencies": [],
+  "supports": [
+    "landing-page",
+    "dashboard",
+    "crm"
+  ],
+  "capabilities": [
+    "page-narrative",
+    "information-architecture"
+  ],
+  "libraries": [
+    "shadcn",
+    "21st.dev"
+  ],
+  "estimatedTimeMs": 120,
+  "costUnits": 2,
+  "qualityWeight": 9.8
+}

@@ -1,0 +1,13 @@
+{
+  "name": "uios-monorepo",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "dev:studio": "npm run dev --workspace=apps/studio",
+    "test": "npm run test --workspaces --if-present"
+  }
+}

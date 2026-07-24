@@ -1,0 +1,8 @@
+{
+  "id": "awesomic-golden-output",
+  "status": "pass",
+  "archetype": "Awesomic Zinc",
+  "cardRadius": "36px",
+  "buttonRadius": "14px",
+  "accent": "#ff5a00"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "motion-director",
+  "name": "Motion Director",
+  "purpose": "Choreograph layout transitions, micro-interactions, stagger timelines, and spring physics.",
+  "priority": 3,
+  "confidence": 0.95,
+  "supported_tasks": [
+    "Motion Choreography",
+    "Spring Physics",
+    "Micro-interactions"
+  ],
+  "dependencies": [
+    "layout-architect"
+  ],
+  "compatible_libraries": [
+    "Framer Motion"
+  ],
+  "quality_score": 95
+}

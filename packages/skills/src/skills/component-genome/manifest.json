@@ -1,0 +1,14 @@
+{
+  "id": "component-genome",
+  "name": "Component Genome",
+  "purpose": "Metadata-driven component schemas storing purpose, intent, emotion, complexity, and libraries.",
+  "priority": 2,
+  "confidence": 0.97,
+  "supported_tasks": [
+    "Component Metadata",
+    "Library Matching Matrix"
+  ],
+  "dependencies": [],
+  "compatible_libraries": [],
+  "quality_score": 97
+}

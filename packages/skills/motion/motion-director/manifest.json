@@ -1,0 +1,30 @@
+{
+  "id": "motion-director",
+  "version": "1.0.0",
+  "category": "motion",
+  "name": "Motion Director",
+  "description": "Choreograph reveal timelines, spring physics, and micro-interactions.",
+  "priority": 85,
+  "confidence": 0.95,
+  "stage": "motion",
+  "parallelizable": true,
+  "dependencies": [
+    "layout-architect"
+  ],
+  "supports": [
+    "landing-page",
+    "dashboard",
+    "crm"
+  ],
+  "capabilities": [
+    "motion",
+    "spring-physics",
+    "micro-interactions"
+  ],
+  "libraries": [
+    "Framer Motion"
+  ],
+  "estimatedTimeMs": 150,
+  "costUnits": 3,
+  "qualityWeight": 9.5
+}

@@ -1,0 +1,19 @@
+{
+  "name": "@uios/sdk",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "UIOS Skill SDK for programmatic agent skill creation, manifest schemas, and testing",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test test/**/*.test.ts"
+  },
+  "dependencies": {
+    "@uios/compiler": "file:../compiler"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3"
+  }
+}

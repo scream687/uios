@@ -1,0 +1,19 @@
+{
+  "id": "reactbits-composer",
+  "name": "React Bits Composer",
+  "purpose": "Micro-interactions, magnetic buttons, custom cursor Proximity feedback.",
+  "priority": 4,
+  "confidence": 0.94,
+  "supported_tasks": [
+    "Magnetic Buttons",
+    "Cursor Interactions",
+    "Particle Proximity"
+  ],
+  "dependencies": [
+    "motion-director"
+  ],
+  "compatible_libraries": [
+    "React Bits"
+  ],
+  "quality_score": 94
+}

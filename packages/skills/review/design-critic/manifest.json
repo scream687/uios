@@ -1,0 +1,27 @@
+{
+  "id": "design-critic",
+  "version": "1.0.0",
+  "category": "review",
+  "name": "Design Critic",
+  "description": "Independent non-self-reviewing critic loop gating compilation approval.",
+  "priority": 98,
+  "confidence": 0.98,
+  "stage": "review",
+  "parallelizable": false,
+  "dependencies": [
+    "anti-ai-detector"
+  ],
+  "supports": [
+    "landing-page",
+    "dashboard",
+    "crm"
+  ],
+  "capabilities": [
+    "critic-review",
+    "ast-refactoring-feedback"
+  ],
+  "libraries": [],
+  "estimatedTimeMs": 100,
+  "costUnits": 2,
+  "qualityWeight": 9.8
+}

@@ -1,0 +1,35 @@
+{
+  "id": "dala-style",
+  "version": "1.0.0",
+  "category": "visual",
+  "name": "Dala Style Compiler",
+  "description": "Dark stage visual compiler enforcing pure #000000 void canvas, monolithic 113px PPNeueMontreal display headlines with negative tracking, ultra-light 200 body copy, floating panel-less layouts, and electric iris violet pill CTAs.",
+  "priority": 95,
+  "confidence": 0.99,
+  "stage": "visual",
+  "parallelizable": true,
+  "dependencies": [
+    "brand-dna"
+  ],
+  "supports": [
+    "landing-page",
+    "dashboard",
+    "crm",
+    "e-commerce",
+    "portfolio"
+  ],
+  "capabilities": [
+    "dark-void",
+    "electric-iris-accent",
+    "monolithic-typography",
+    "ultra-light-body",
+    "floating-layouts"
+  ],
+  "libraries": [
+    "shadcn",
+    "21st.dev"
+  ],
+  "estimatedTimeMs": 100,
+  "costUnits": 1,
+  "qualityWeight": 9.9
+}

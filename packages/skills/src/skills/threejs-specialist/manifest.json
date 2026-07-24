@@ -1,0 +1,21 @@
+{
+  "id": "threejs-specialist",
+  "name": "Three.js Specialist",
+  "purpose": "3D interactive canvas scenes, React Three Fiber (R3F), and GPU budget management.",
+  "priority": 5,
+  "confidence": 0.91,
+  "supported_tasks": [
+    "3D Canvas",
+    "R3F Shader Scene",
+    "GPU Budget"
+  ],
+  "dependencies": [
+    "frontend-architect"
+  ],
+  "compatible_libraries": [
+    "Three.js",
+    "React Three Fiber",
+    "Drei"
+  ],
+  "quality_score": 91
+}

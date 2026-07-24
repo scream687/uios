@@ -1,0 +1,35 @@
+{
+  "id": "caldera-style",
+  "version": "1.0.0",
+  "category": "visual",
+  "name": "Caldera Style Compiler",
+  "description": "Forge fire visual compiler enforcing warm Pumice plaster canvas (#e2e2df), molten Ember orange (#fc5000) pill controls, ultrabold 189px PP Neue Corp Compact display headlines, DM Sans 500 body text, 40px surface radii, and halftone dot patterns.",
+  "priority": 95,
+  "confidence": 0.99,
+  "stage": "visual",
+  "parallelizable": true,
+  "dependencies": [
+    "brand-dna"
+  ],
+  "supports": [
+    "landing-page",
+    "dashboard",
+    "crm",
+    "e-commerce",
+    "portfolio"
+  ],
+  "capabilities": [
+    "warm-limestone",
+    "molten-ember-action",
+    "architectural-display",
+    "halftone-motifs",
+    "shadowless-flatness"
+  ],
+  "libraries": [
+    "shadcn",
+    "21st.dev"
+  ],
+  "estimatedTimeMs": 100,
+  "costUnits": 1,
+  "qualityWeight": 9.9
+}

@@ -1,0 +1,15 @@
+{
+  "id": "anti-ai-detector",
+  "name": "Anti-AI Pattern Detector",
+  "purpose": "Audit and eliminate overused glassmorphism, glowing blur bubbles, and generic AI templates.",
+  "priority": 6,
+  "confidence": 0.99,
+  "supported_tasks": [
+    "Cliché Detection",
+    "Glass Abuse Check",
+    "Glow Bubble Check"
+  ],
+  "dependencies": [],
+  "compatible_libraries": [],
+  "quality_score": 99
+}

@@ -1,0 +1,25 @@
+{
+  "id": "anti-ai-detector",
+  "version": "1.0.0",
+  "category": "review",
+  "name": "Anti-AI Pattern Detector",
+  "description": "Audit and eliminate overused glassmorphism, glowing blur bubbles, and generic templates.",
+  "priority": 95,
+  "confidence": 0.99,
+  "stage": "review",
+  "parallelizable": true,
+  "dependencies": [],
+  "supports": [
+    "landing-page",
+    "dashboard",
+    "crm"
+  ],
+  "capabilities": [
+    "anti-ai-audit",
+    "smell-detection"
+  ],
+  "libraries": [],
+  "estimatedTimeMs": 80,
+  "costUnits": 1,
+  "qualityWeight": 9.9
+}

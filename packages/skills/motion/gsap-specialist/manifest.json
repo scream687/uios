@@ -1,0 +1,30 @@
+{
+  "id": "gsap-specialist",
+  "version": "1.0.0",
+  "category": "motion",
+  "name": "GSAP Specialist",
+  "description": "ScrollTrigger pinned storytelling timelines and complex SVG animations.",
+  "priority": 80,
+  "confidence": 0.92,
+  "stage": "motion",
+  "parallelizable": false,
+  "dependencies": [
+    "motion-director"
+  ],
+  "supports": [
+    "landing-page",
+    "dashboard",
+    "crm"
+  ],
+  "capabilities": [
+    "motion",
+    "scroll-trigger",
+    "complex-timelines"
+  ],
+  "libraries": [
+    "GSAP"
+  ],
+  "estimatedTimeMs": 220,
+  "costUnits": 4,
+  "qualityWeight": 9.2
+}

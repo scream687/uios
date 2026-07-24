@@ -1,0 +1,20 @@
+{
+  "name": "@uios/critics",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "UIOS Independent Design Critic, AI Smell Detector, Review Board Personas, and Benchmark Engine",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test test/**/*.test.ts"
+  },
+  "dependencies": {
+    "@uios/compiler": "file:../compiler",
+    "@uios/knowledge": "file:../knowledge"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3"
+  }
+}

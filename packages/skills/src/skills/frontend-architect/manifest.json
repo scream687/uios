@@ -1,0 +1,18 @@
+{
+  "id": "frontend-architect",
+  "name": "Frontend Architect",
+  "purpose": "React 19 RSC, component composition, CVA, state management, and file architecture.",
+  "priority": 3,
+  "confidence": 0.99,
+  "supported_tasks": [
+    "React Patterns",
+    "RSC Optimization",
+    "CVA Matrix"
+  ],
+  "dependencies": [],
+  "compatible_libraries": [
+    "React 19",
+    "Next.js 15"
+  ],
+  "quality_score": 99
+}

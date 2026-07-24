@@ -1,0 +1,27 @@
+{
+  "id": "react-emitter",
+  "version": "1.0.0",
+  "category": "emitters",
+  "name": "React TSX Emitter",
+  "description": "Emit DesignAST into clean, production-ready React TSX component code.",
+  "priority": 100,
+  "confidence": 0.99,
+  "stage": "emission",
+  "parallelizable": false,
+  "dependencies": [],
+  "supports": [
+    "landing-page",
+    "dashboard",
+    "crm"
+  ],
+  "capabilities": [
+    "react-code-emission"
+  ],
+  "libraries": [
+    "React 19",
+    "Tailwind CSS"
+  ],
+  "estimatedTimeMs": 150,
+  "costUnits": 3,
+  "qualityWeight": 9.9
+}

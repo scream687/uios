@@ -1,0 +1,15 @@
+{
+  "id": "brand-dna",
+  "name": "Brand DNA",
+  "purpose": "Synthesize brand archetypes (Linear Dark, Apple Minimal, Stripe SaaS) and design tokens.",
+  "priority": 1,
+  "confidence": 0.99,
+  "supported_tasks": [
+    "Brand Archetype",
+    "Design Personality",
+    "Token Synthesis"
+  ],
+  "dependencies": [],
+  "compatible_libraries": [],
+  "quality_score": 99
+}

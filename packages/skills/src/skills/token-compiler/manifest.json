@@ -1,0 +1,19 @@
+{
+  "id": "token-compiler",
+  "name": "Token Compiler",
+  "purpose": "Transform design tokens into Tailwind, CSS variables, Figma JSON, and motion tokens.",
+  "priority": 2,
+  "confidence": 0.99,
+  "supported_tasks": [
+    "CSS Variable Emission",
+    "Tailwind Config Generation",
+    "Figma Token Export"
+  ],
+  "dependencies": [
+    "brand-dna"
+  ],
+  "compatible_libraries": [
+    "Tailwind CSS"
+  ],
+  "quality_score": 99
+}

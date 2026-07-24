@@ -1,0 +1,16 @@
+{
+  "id": "benchmark-reviewer",
+  "name": "Benchmark Reviewer",
+  "purpose": "Compare generated interface quality against Apple, Linear, Stripe, and Framer standards.",
+  "priority": 6,
+  "confidence": 0.97,
+  "supported_tasks": [
+    "Quality Benchmark",
+    "Standard Comparison"
+  ],
+  "dependencies": [
+    "design-critic"
+  ],
+  "compatible_libraries": [],
+  "quality_score": 97
+}

@@ -1,0 +1,44 @@
+{
+  "id": "layout-architect",
+  "version": "2.1.0",
+  "category": "layout",
+  "name": "Layout Architect",
+  "description": "Master layout compiler enforcing 12-column grid, fluid spacing scales, container max-widths, responsive breakpoints, and AST-only structural mutations.",
+  "priority": 100,
+  "confidence": 0.98,
+  "stage": "layout",
+  "parallelizable": true,
+  "dependencies": [
+    "page-planner",
+    "brand-dna"
+  ],
+  "before": [
+    "visual-designer",
+    "motion-director"
+  ],
+  "after": [
+    "page-planner"
+  ],
+  "supports": [
+    "landing-page",
+    "dashboard",
+    "crm",
+    "e-commerce",
+    "portfolio"
+  ],
+  "capabilities": [
+    "layout",
+    "grid-system",
+    "fluid-spacing",
+    "responsive-breakpoints",
+    "ast-mutation"
+  ],
+  "libraries": [
+    "shadcn",
+    "21st.dev",
+    "Magic UI"
+  ],
+  "estimatedTimeMs": 120,
+  "costUnits": 2,
+  "qualityWeight": 9.8
+}

@@ -1,0 +1,18 @@
+{
+  "id": "animation-planner",
+  "name": "Animation Planner",
+  "purpose": "Choreograph stagger delays, transition timing, and spring curves across screen sections.",
+  "priority": 3,
+  "confidence": 0.96,
+  "supported_tasks": [
+    "Stagger Timeline",
+    "Transition Planning"
+  ],
+  "dependencies": [
+    "motion-director"
+  ],
+  "compatible_libraries": [
+    "Framer Motion"
+  ],
+  "quality_score": 96
+}

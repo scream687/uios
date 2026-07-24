@@ -1,0 +1,35 @@
+{
+  "id": "jeton-style",
+  "version": "1.0.0",
+  "category": "visual",
+  "name": "Jeton Style Compiler",
+  "description": "Editorial fintech visual compiler enforcing Paper White canvas (#ffffff), searing Signal Orange (#f73b20) accents, Ink Roast near-black brown body text (#360802), Sequel Sans geometric display typography (106-155px with 0.9-1.0 line-height), 16px card geometry, and inverted lift shadows.",
+  "priority": 95,
+  "confidence": 0.99,
+  "stage": "visual",
+  "parallelizable": true,
+  "dependencies": [
+    "brand-dna"
+  ],
+  "supports": [
+    "landing-page",
+    "dashboard",
+    "crm",
+    "e-commerce",
+    "portfolio"
+  ],
+  "capabilities": [
+    "editorial-fintech",
+    "signal-orange-accents",
+    "ink-roast-body",
+    "inverted-lift-shadows",
+    "sequel-typography"
+  ],
+  "libraries": [
+    "shadcn",
+    "21st.dev"
+  ],
+  "estimatedTimeMs": 100,
+  "costUnits": 1,
+  "qualityWeight": 9.9
+}

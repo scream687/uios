@@ -1,0 +1,18 @@
+{
+  "id": "hero-golden-output",
+  "componentType": "Hero",
+  "status": "pass",
+  "variant": "Spotlight Bento",
+  "layout": {
+    "display": "grid",
+    "columns": 12,
+    "containerWidth": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+    "paddingY": "py-24 md:py-32",
+    "gap": "gap-8"
+  },
+  "metrics": {
+    "gridComplianceScore": 100,
+    "spacingScaleScore": 100,
+    "responsiveCoverageScore": 100
+  }
+}

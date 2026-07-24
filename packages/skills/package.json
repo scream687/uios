@@ -1,0 +1,20 @@
+{
+  "name": "@uios/skills",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "UIOS Categorized Skill Modules, skill.md specifications, and Dynamic Skill Registry",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test test/**/*.test.ts"
+  },
+  "dependencies": {
+    "@uios/compiler": "file:../compiler",
+    "@uios/sdk": "file:../sdk"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3"
+  }
+}

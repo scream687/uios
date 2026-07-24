@@ -1,0 +1,22 @@
+{
+  "name": "@uios/engine",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "UIOS Engine Kernel (Multi-Candidate Generator, Engineering Intelligence, Versioning, Autonomous Improvement)",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test test/**/*.test.ts"
+  },
+  "dependencies": {
+    "@uios/compiler": "file:../compiler",
+    "@uios/knowledge": "file:../knowledge",
+    "@uios/critics": "file:../critics",
+    "@uios/adapters": "file:../adapters"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3"
+  }
+}

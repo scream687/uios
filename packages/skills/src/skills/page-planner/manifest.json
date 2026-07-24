@@ -1,0 +1,18 @@
+{
+  "id": "page-planner",
+  "name": "Page Planner",
+  "purpose": "High level page structure, section flow, and information architecture orchestration.",
+  "priority": 1,
+  "confidence": 0.98,
+  "supported_tasks": [
+    "Page Structure",
+    "Information Architecture",
+    "Section Ordering"
+  ],
+  "dependencies": [],
+  "compatible_libraries": [
+    "shadcn/ui",
+    "21st.dev"
+  ],
+  "quality_score": 98
+}

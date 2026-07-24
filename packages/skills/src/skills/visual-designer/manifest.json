@@ -1,0 +1,19 @@
+{
+  "id": "visual-designer",
+  "name": "Visual Designer",
+  "purpose": "Color balance, visual hierarchy, whitespace density, and brand consistency.",
+  "priority": 2,
+  "confidence": 0.96,
+  "supported_tasks": [
+    "Color Palette",
+    "Visual Weight",
+    "Whitespace Balance"
+  ],
+  "dependencies": [
+    "brand-dna"
+  ],
+  "compatible_libraries": [
+    "Tailwind CSS"
+  ],
+  "quality_score": 96
+}

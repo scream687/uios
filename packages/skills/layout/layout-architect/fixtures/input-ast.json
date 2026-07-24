@@ -1,0 +1,11 @@
+{
+  "id": "hero-input-fixture",
+  "componentType": "Hero",
+  "variant": "Unstyled Raw Node",
+  "layout": {
+    "display": "flex",
+    "containerWidth": "unbounded",
+    "paddingY": "py-0",
+    "gap": "gap-0"
+  }
+}

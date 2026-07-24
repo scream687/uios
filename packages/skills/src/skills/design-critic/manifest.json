@@ -1,0 +1,17 @@
+{
+  "id": "design-critic",
+  "name": "Design Critic",
+  "purpose": "Independent non-self-reviewing critic loop gating compilation approval.",
+  "priority": 6,
+  "confidence": 0.98,
+  "supported_tasks": [
+    "Independent Review",
+    "AST Refactoring Feedback"
+  ],
+  "dependencies": [
+    "anti-ai-detector",
+    "accessibility-auditor"
+  ],
+  "compatible_libraries": [],
+  "quality_score": 98
+}
