@@ -1,15 +1,31 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Flame, Compass, ChevronDown, Check, ShoppingBag, Sparkles, Wind, Layers, Activity, Thermometer, MapPin, Sliders } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
+import { ArrowRight, Flame, Compass, ChevronDown, Check, ShoppingBag, Sparkles, Wind, Activity, MapPin, RefreshCw, Zap, Eye, Sliders } from 'lucide-react';
 
 export default function KuroCoffeeShopPage() {
-  const [activeTab, setActiveTab] = useState<'terroir' | 'fermentation' | 'roasting' | 'cupping'>('terroir');
-  const [selectedElevation, setSelectedElevation] = useState<number>(2100);
-  const [fermentationHours, setFermentationHours] = useState<number>(120);
+  const [mounted, setMounted] = useState(false);
   const [activeLot, setActiveLot] = useState<number>(0);
   const [cartCount, setCartCount] = useState<number>(0);
+  const [selectedElevation, setSelectedElevation] = useState<number>(2100);
+  const [fermentationHours, setFermentationHours] = useState<number>(120);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const { scrollYProgress } = useScroll();
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 90, damping: 25, restDelta: 0.001 });
+
+  // Motion Transforms for Motion-Heavy Scroll Effects
+  const heroScale = useTransform(smoothProgress, [0, 0.2], [1, 0.88]);
+  const heroOpacity = useTransform(smoothProgress, [0, 0.2], [1, 0.15]);
+  const heroRotateX = useTransform(smoothProgress, [0, 0.25], [0, 12]);
+  
+  const cardRotateY = useTransform(smoothProgress, [0.05, 0.3], [-10, 10]);
+  const terroirY = useTransform(smoothProgress, [0.15, 0.4], [80, 0]);
+  const terroirOpacity = useTransform(smoothProgress, [0.15, 0.35], [0, 1]);
 
   const microLots = [
     {
@@ -20,7 +36,6 @@ export default function KuroCoffeeShopPage() {
       notes: ['White Jasmine', 'Bergamot', 'Wild Peach'],
       score: '94.5 SCA',
       price: '$42',
-      terroirData: { soil: 'Volcanic Basalt Ash', brix: '24.5°', moisture: '10.8%' },
     },
     {
       id: 'lot-902',
@@ -30,7 +45,6 @@ export default function KuroCoffeeShopPage() {
       notes: ['Pink Guava', 'Lychee', 'Rose Water'],
       score: '93.8 SCA',
       price: '$48',
-      terroirData: { soil: 'Andean Volcanic Loam', brix: '25.1°', moisture: '11.2%' },
     },
   ];
 
@@ -38,49 +52,69 @@ export default function KuroCoffeeShopPage() {
 
   return (
     <div className="min-h-screen bg-[#050507] text-[#f3ebd9] font-sans antialiased selection:bg-[#ff3b00] selection:text-white relative overflow-x-hidden">
-      {/* Background Noise Texture */}
-      <div className="fixed inset-0 pointer-events-none opacity-[0.04] bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px] z-50" />
+      {/* 1. SCROLL PROGRESS BAR HEADER */}
+      {mounted && (
+        <motion.div
+          style={{ scaleX: smoothProgress }}
+          className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#ff3b00] via-[#ff7700] to-[#ff3b00] origin-left z-50 shadow-[0_0_20px_#ff3b00]"
+        />
+      )}
 
-      {/* 1. Header Bar - Asymmetric Floating Navigation */}
-      <header className="fixed top-0 inset-x-0 z-50 bg-[#050507]/90 backdrop-blur-2xl border-b border-white/10 px-8 py-5">
+      {/* Noise Texture */}
+      <div className="fixed inset-0 pointer-events-none opacity-[0.04] bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px] z-40" />
+
+      {/* 2. NAVIGATION HEADER */}
+      <header className="fixed top-0 inset-x-0 z-40 bg-[#050507]/85 backdrop-blur-2xl border-b border-white/10 px-8 py-5">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-6">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="flex items-center space-x-6"
+          >
             <div className="w-10 h-10 bg-[#ff3b00] text-black font-mono font-black text-xl flex items-center justify-center -rotate-1 shadow-[0_0_30px_rgba(255,59,0,0.5)]">
               黒
             </div>
             <div>
               <span className="font-extrabold text-2xl tracking-tighter text-[#f3ebd9] block leading-none">KURO</span>
-              <span className="text-[9px] font-mono uppercase text-[#ff3b00] tracking-[0.3em]">Ginza Tokyo • UIOS Agent Curated</span>
+              <span className="text-[9px] font-mono uppercase text-[#ff3b00] tracking-[0.3em]">Ginza Tokyo • 60FPS Scroll Motion</span>
             </div>
-          </div>
+          </motion.div>
 
           <nav className="hidden lg:flex items-center space-x-10 text-xs font-mono uppercase tracking-[0.2em] text-white/50">
             <a href="#terroir" className="hover:text-[#ff3b00] transition-colors">01 / Terroir Map</a>
-            <a href="#fermentation" className="hover:text-[#ff3b00] transition-colors">02 / Fermentation Vat</a>
+            <a href="#fermentation" className="hover:text-[#ff3b00] transition-colors">02 / Vat Science</a>
             <a href="#roasting" className="hover:text-[#ff3b00] transition-colors">03 / Roast Physics</a>
             <a href="#subscription" className="hover:text-[#ff3b00] transition-colors">04 / Allocation</a>
           </nav>
 
-          <button
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => setCartCount(c => c + 1)}
             className="px-6 py-3 bg-[#f3ebd9]/10 border border-[#f3ebd9]/20 hover:bg-[#ff3b00] hover:text-black hover:border-[#ff3b00] transition-all flex items-center space-x-3 text-xs font-mono rounded-none"
           >
             <ShoppingBag className="w-4 h-4 text-[#ff3b00]" />
             <span>Bag ({cartCount})</span>
-          </button>
+          </motion.button>
         </div>
       </header>
 
-      {/* 2. SCENE 1: CINEMATIC TERROIR HERO (100VH DOMINANT SCENE) */}
+      {/* 3. SCENE 1: CINEMATIC SCROLL-DRIVEN MOTION HERO (100VH) */}
       <section className="relative h-screen w-full flex flex-col justify-between pt-32 pb-16 px-8 border-b border-white/10 overflow-hidden">
+        {/* Animated Particle & Fog Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#050507] via-[#050507]/60 to-transparent z-10" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#ff3b00]/20 via-transparent to-transparent opacity-70 animate-pulse pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#ff3b00]/25 via-transparent to-transparent opacity-80 animate-pulse pointer-events-none" />
 
         <div className="max-w-7xl mx-auto w-full relative z-20 grid lg:grid-cols-12 gap-8 items-end my-auto">
-          <div className="lg:col-span-8 space-y-6">
+          {/* Scroll Transform Headline */}
+          <motion.div
+            style={mounted ? { scale: heroScale, opacity: heroOpacity, rotateX: heroRotateX } : {}}
+            className="lg:col-span-8 space-y-6"
+          >
             <div className="inline-flex items-center space-x-3 px-4 py-1.5 bg-[#ff3b00]/10 border border-[#ff3b00]/40 text-[#ff3b00] text-xs font-mono tracking-widest uppercase">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>UIOS Scene Composer • Volcanic Monolith Viewport</span>
+              <span className="w-2 h-2 rounded-full bg-[#ff3b00] animate-ping" />
+              <span>UIOS Scene Engine • 60FPS Scroll Kinematics</span>
             </div>
 
             <h1 className="text-6xl sm:text-8xl lg:text-[130px] font-black tracking-[-0.065em] leading-[0.88] text-[#f3ebd9]">
@@ -89,31 +123,31 @@ export default function KuroCoffeeShopPage() {
             </h1>
 
             <p className="text-xl md:text-2xl text-[#f3ebd9]/70 font-light max-w-2xl leading-relaxed pt-2">
-              Micro-lots grown in Ethiopian volcanic ash at 2,100 meters. Anaerobic nitrogen fermentation and cast-iron roasting in Ginza.
+              High-altitude micro-lots grown in Ethiopian volcanic ash at 2,100 meters. Anaerobic nitrogen fermentation and cast-iron roasting in Ginza.
             </p>
 
             <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-6 pt-4">
-              <button
+              <motion.button
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
                 onClick={() => setCartCount(c => c + 1)}
                 className="px-10 py-5 bg-[#ff3b00] text-black font-bold text-xs uppercase tracking-[0.25em] hover:bg-white transition-all shadow-[0_0_50px_rgba(255,59,0,0.4)] flex items-center justify-center space-x-4"
               >
                 <span>Acquire Reserve Batch</span>
                 <ArrowRight className="w-4 h-4" />
-              </button>
+              </motion.button>
             </div>
-          </div>
+          </motion.div>
 
-          {/* OVERLAPPING HERO MONOLITH TELEMETRY CARD */}
+          {/* 3D ROTATIONAL PARALLAX HERO MONOLITH */}
           <div className="lg:col-span-4 relative z-30 lg:translate-y-16">
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-[#0c0c10] border border-[#ff3b00]/40 p-8 space-y-6 shadow-[0_20px_60px_rgba(0,0,0,0.9)] relative overflow-hidden backdrop-blur-md"
+              style={mounted ? { rotateY: cardRotateY } : {}}
+              className="bg-[#0c0c10] border border-[#ff3b00]/40 p-8 space-y-6 shadow-[0_20px_60px_rgba(0,0,0,0.9)] relative overflow-hidden backdrop-blur-md perspective-1000"
             >
               <div className="flex justify-between items-start border-b border-white/10 pb-4">
                 <div>
-                  <span className="text-[10px] font-mono text-[#ff3b00] uppercase tracking-[0.2em]">FEATURED LOT</span>
+                  <span className="text-[10px] font-mono text-[#ff3b00] uppercase tracking-[0.2em]">SINGLE ORIGIN RESERVE</span>
                   <h3 className="text-2xl font-extrabold text-white tracking-tight mt-1">{currentLot.name}</h3>
                   <p className="text-xs font-mono text-white/50">{currentLot.origin}</p>
                 </div>
@@ -121,7 +155,7 @@ export default function KuroCoffeeShopPage() {
               </div>
 
               <div className="space-y-2">
-                <span className="text-[10px] font-mono uppercase text-white/40 tracking-widest block">Flavor Profile</span>
+                <span className="text-[10px] font-mono uppercase text-white/40 tracking-widest block">Flavor Spectrum</span>
                 <div className="flex flex-wrap gap-2">
                   {currentLot.notes.map((note, idx) => (
                     <span key={idx} className="px-3 py-1 bg-white/5 border border-white/10 text-xs font-mono text-[#f3ebd9]">
@@ -150,27 +184,30 @@ export default function KuroCoffeeShopPage() {
           </div>
         </div>
 
-        {/* Narrative Scroll Anchor */}
+        {/* Narrative Anchor */}
         <div className="max-w-7xl mx-auto w-full relative z-20 flex justify-between items-center font-mono text-xs text-white/40 pt-8 border-t border-white/10">
-          <span>01 / 06 EXPERIENCE NARRATIVE</span>
+          <span>01 / 06 MOTION SCENE</span>
           <a href="#terroir" className="flex items-center space-x-2 text-[#ff3b00] hover:text-white transition-colors">
-            <span className="uppercase tracking-widest text-[10px]">Explore Interactive Modules</span>
+            <span className="uppercase tracking-widest text-[10px]">Scroll Motion Journey</span>
             <ChevronDown className="w-4 h-4 animate-bounce" />
           </a>
-          <span>GINZA ROASTING LAB</span>
+          <span>GINZA ROAST LAB</span>
         </div>
       </section>
 
-      {/* 3. DOMAIN EXPERIENCE MODULE 01: INTERACTIVE TERROIR ELEVATION MAP */}
+      {/* 4. SCROLL SECTION 02: INTERACTIVE ALTITUDE TERROIR SIMULATOR */}
       <section id="terroir" className="px-8 py-32 border-b border-white/10 bg-[#050507]">
-        <div className="max-w-7xl mx-auto space-y-12">
+        <motion.div
+          style={mounted ? { y: terroirY, opacity: terroirOpacity } : {}}
+          className="max-w-7xl mx-auto space-y-12"
+        >
           <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-white/10 pb-6">
             <div>
               <span className="text-xs font-mono text-[#ff3b00] uppercase tracking-[0.3em]">DOMAIN EXPERIENCE MODULE 01</span>
-              <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight mt-2">Terroir Elevation Simulator.</h2>
+              <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight mt-2">Terroir Altitude Kinematics.</h2>
             </div>
             <p className="text-white/50 text-sm max-w-md font-mono mt-4 md:mt-0">
-              Adjust altitude parameters to simulate bean density and sugar concentration at high elevation.
+              Interactive altitude physics engine simulating bean density and sugar concentration.
             </p>
           </div>
 
@@ -178,7 +215,7 @@ export default function KuroCoffeeShopPage() {
             <div className="lg:col-span-6 space-y-8">
               <div className="space-y-2">
                 <div className="flex justify-between font-mono text-xs text-white/60">
-                  <span>ALTITUDE SIMULATOR</span>
+                  <span>ALTITUDE PARAMETER</span>
                   <span className="text-[#ff3b00] font-bold">{selectedElevation} METERS</span>
                 </div>
                 <input
@@ -203,7 +240,7 @@ export default function KuroCoffeeShopPage() {
                 </div>
                 <div className="bg-white/5 p-4 border border-white/10">
                   <span className="text-white/40 block text-[10px]">Acidity Potential</span>
-                  <span className="text-lg font-bold text-white">{selectedElevation > 2000 ? 'High Phosphoric' : 'Citric Balanced'}</span>
+                  <span className="text-lg font-bold text-white">{selectedElevation > 2000 ? 'Phosphoric High' : 'Citric Balanced'}</span>
                 </div>
               </div>
             </div>
@@ -219,19 +256,19 @@ export default function KuroCoffeeShopPage() {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
-      {/* 4. DOMAIN EXPERIENCE MODULE 02: ANAEROBIC FERMENTATION CHAMBER TELEMETRY */}
+      {/* 5. SCROLL SECTION 03: ANAEROBIC FERMENTATION CHRONO VAT TELEMETRY */}
       <section id="fermentation" className="px-8 py-32 border-b border-white/10 bg-[#08080c]">
         <div className="max-w-7xl mx-auto space-y-12">
           <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-white/10 pb-6">
             <div>
               <span className="text-xs font-mono text-[#ff3b00] uppercase tracking-[0.3em]">DOMAIN EXPERIENCE MODULE 02</span>
-              <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight mt-2">Anaerobic Fermentation Chrono Vat.</h2>
+              <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight mt-2">Anaerobic Vat Chrono Simulation.</h2>
             </div>
             <p className="text-white/50 text-sm max-w-md font-mono mt-4 md:mt-0">
-              Interactive nitrogen vat pressure simulation across 120 hours of sealed fermentation.
+              Pressurized nitrogen vat pressure simulation across 120 hours of sealed fermentation.
             </p>
           </div>
 
@@ -276,52 +313,19 @@ export default function KuroCoffeeShopPage() {
               </div>
               <h4 className="text-2xl font-bold">Pressurized Nitrogen Environment</h4>
               <p className="text-sm text-white/60 leading-relaxed font-light">
-                At {fermentationHours} hours, oxygen is entirely purged. Wild yeasts ferment organic acids into complex floral esters without vinegar oxidation, unlocking rare bergamot and wild peach aromatics.
+                At {fermentationHours} hours, oxygen is entirely purged. Wild yeasts ferment organic acids into complex floral esters without vinegar oxidation.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 5. DOMAIN EXPERIENCE MODULE 03: GINZA CAST-IRON ROAST CURVE TELEMETRY */}
-      <section id="roasting" className="px-8 py-32 border-b border-white/10 bg-[#050507]">
-        <div className="max-w-7xl mx-auto space-y-12">
-          <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-white/10 pb-6">
-            <div>
-              <span className="text-xs font-mono text-[#ff3b00] uppercase tracking-[0.3em]">DOMAIN EXPERIENCE MODULE 03</span>
-              <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight mt-2">Ginza Cast-Iron Roast Curve.</h2>
-            </div>
-            <p className="text-white/50 text-sm max-w-md font-mono mt-4 md:mt-0">
-              Custom Fuji Royal roaster conductive heat curve and optical sorter tolerances.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 font-mono text-xs">
-            <div className="bg-[#0b0b0f] border border-white/15 p-8 space-y-4">
-              <Flame className="w-8 h-8 text-[#ff3b00]" />
-              <h4 className="text-lg font-bold text-white">Cast-Iron Conductive Plate</h4>
-              <p className="text-white/50 leading-relaxed">Solid 1968 Fuji Royal cast-iron drum maintains even conductive heat transfer to preserve aromatic oils.</p>
-            </div>
-            <div className="bg-[#0b0b0f] border border-white/15 p-8 space-y-4">
-              <Wind className="w-8 h-8 text-[#ff3b00]" />
-              <h4 className="text-lg font-bold text-white">Variable Exhaust Velocity</h4>
-              <p className="text-white/50 leading-relaxed">Variable exhaust airflow removes chaff in milliseconds to prevent smokiness and preserve acidity.</p>
-            </div>
-            <div className="bg-[#0b0b0f] border border-white/15 p-8 space-y-4">
-              <Compass className="w-8 h-8 text-[#ff3b00]" />
-              <h4 className="text-lg font-bold text-white">Infrared Color Sorting</h4>
-              <p className="text-white/50 leading-relaxed">Infrared camera sorters discard any bean deviating by more than 0.5% from our master roast curve.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. DOMAIN EXPERIENCE MODULE 04: DISPROPORTIONATE MONOLITH SUBSCRIPTION */}
+      {/* 6. SCROLL SECTION 04: CEREMONIAL MONOLITH SUBSCRIPTION ALLOCATION */}
       <section id="subscription" className="px-8 py-32 bg-[#050507]">
         <div className="max-w-7xl mx-auto space-y-16">
           <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-white/10 pb-8">
             <div>
-              <span className="text-xs font-mono text-[#ff3b00] uppercase tracking-[0.3em]">DOMAIN EXPERIENCE MODULE 04</span>
+              <span className="text-xs font-mono text-[#ff3b00] uppercase tracking-[0.3em]">DOMAIN EXPERIENCE MODULE 03</span>
               <h2 className="text-4xl md:text-7xl font-extrabold tracking-tight mt-2">The Collector’s Reserve.</h2>
             </div>
             <p className="text-white/50 text-sm max-w-md font-mono mt-4 md:mt-0">
@@ -329,7 +333,11 @@ export default function KuroCoffeeShopPage() {
             </p>
           </div>
 
-          <div className="bg-[#0c0c10] border-2 border-[#ff3b00] p-12 lg:p-20 relative overflow-hidden shadow-[0_0_100px_rgba(255,59,0,0.2)]">
+          {/* DISPROPORTIONATE MONOLITH CARD */}
+          <motion.div
+            whileHover={{ scale: 1.01 }}
+            className="bg-[#0c0c10] border-2 border-[#ff3b00] p-12 lg:p-20 relative overflow-hidden shadow-[0_0_100px_rgba(255,59,0,0.2)]"
+          >
             <div className="grid lg:grid-cols-12 gap-12 items-center">
               <div className="lg:col-span-7 space-y-8">
                 <div className="inline-block px-3 py-1 bg-[#ff3b00] text-black font-mono text-[10px] uppercase font-bold tracking-widest">
@@ -371,22 +379,24 @@ export default function KuroCoffeeShopPage() {
                 </div>
                 <p className="text-xs text-white/50 font-mono">Includes Complimentary Worldwide DHL Express Shipping</p>
 
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
                   onClick={() => setCartCount(c => c + 1)}
                   className="w-full py-5 bg-[#ff3b00] text-black font-bold text-xs uppercase tracking-[0.25em] hover:bg-white transition-all shadow-xl shadow-[#ff3b00]/30"
                 >
                   Start Reserve Subscription
-                </button>
+                </motion.button>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Footer */}
       <footer className="px-8 py-16 border-t border-white/10 text-center font-mono text-xs text-white/40 space-y-4">
         <p>© 2026 KURO Coffee Roasters Tokyo • Ginza 4-Chome, Chuo City, Tokyo</p>
-        <p className="text-[10px] text-[#ff3b00]">Curated by UIOS Agents, Skills & Scene Composer Engine</p>
+        <p className="text-[10px] text-[#ff3b00]">Motion-Driven & Compiled by UIOS Scene Composer & Framer Motion Physics Engine</p>
       </footer>
     </div>
   );
