@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Sparkles, Play, RefreshCw, Cpu, Layers, ShieldCheck, Zap, Code2, Award, Terminal } from 'lucide-react';
+import Link from 'next/link';
+import { Sparkles, Play, RefreshCw, Cpu, Layers, ShieldCheck, Zap, Code2, Award, Terminal, Building2 } from 'lucide-react';
 import { DesignSpecViewer } from '@/components/DesignSpecViewer';
 import { CandidateSelector } from '@/components/CandidateSelector';
 import { SmellDetectorCard } from '@/components/SmellDetectorCard';
@@ -64,6 +65,12 @@ export default function UIOSStudioDashboard() {
           </div>
 
           <div className="flex items-center gap-4 text-xs font-mono text-gray-400">
+            <Link
+              href="/real-estate-saas"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#3a8088] to-[#3b82f6] text-white font-medium hover:opacity-90 transition-all shadow-md"
+            >
+              <Building2 className="w-3.5 h-3.5" /> Launch Real Estate SaaS Demo →
+            </Link>
             <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10">
               <Zap className="w-3.5 h-3.5 text-amber-400" /> React 19 RSC & Edge Compiler
             </span>
