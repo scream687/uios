@@ -1,5 +1,6 @@
 {
-  "registryVersion": "1.0.0",
+  "registryVersion": "2.0.0",
+  "skillsCount": 23,
   "skills": [
     {
       "id": "anti-slop-frontend",
@@ -15,6 +16,106 @@
       "id": "ui-ux-pro-max",
       "path": "packages/ui/skills/ui-ux-pro-max/SKILL.md",
       "description": "UI/UX Pro Max skill defining industry-specific design stacks, color palettes, component blueprints, and design tokens for SaaS, E-Commerce, DevTools, and Portfolios."
+    },
+    {
+      "id": "taste-skill",
+      "path": "packages/ui/skills/taste-skill/SKILL.md",
+      "description": "Anti-slop frontend skill for landing pages, portfolios, and redesigns (Leonxlnx)."
+    },
+    {
+      "id": "brutalist-skill",
+      "path": "packages/ui/skills/brutalist-skill/SKILL.md",
+      "description": "Neo-brutalist raw layout, high-contrast borders, and bold typography skill."
+    },
+    {
+      "id": "minimalist-skill",
+      "path": "packages/ui/skills/minimalist-skill/SKILL.md",
+      "description": "Minimalist Swiss-style layout precision and airy whitespace rhythm skill."
+    },
+    {
+      "id": "soft-skill",
+      "path": "packages/ui/skills/soft-skill/SKILL.md",
+      "description": "Warm, organic shapes, soft shadows, and calm tactile interface skill."
+    },
+    {
+      "id": "redesign-skill",
+      "path": "packages/ui/skills/redesign-skill/SKILL.md",
+      "description": "Audit-first redesign protocol (Preserve vs Overhaul)."
+    },
+    {
+      "id": "impeccable",
+      "path": "packages/ui/skills/impeccable/SKILL.md",
+      "description": "Impeccable typography, layout micro-refinements, colorize, and animate skill (pbakaus)."
+    },
+    {
+      "id": "design-system",
+      "path": "packages/ui/skills/design-system/SKILL.md",
+      "description": "Token architecture, primitive tokens, and Tailwind integration skill."
+    },
+    {
+      "id": "ui-styling",
+      "path": "packages/ui/skills/ui-styling/SKILL.md",
+      "description": "shadcn/ui theming, Tailwind utilities, and responsive layout skill."
+    },
+    {
+      "id": "brand",
+      "path": "packages/ui/skills/brand/SKILL.md",
+      "description": "Brand guidelines, voice framework, and visual identity skill."
+    },
+    {
+      "id": "imagegen-frontend-web",
+      "path": "packages/ui/skills/imagegen-frontend-web/SKILL.md",
+      "description": "Web hero visual image generation and layout physics skill."
+    },
+    {
+      "id": "imagegen-frontend-mobile",
+      "path": "packages/ui/skills/imagegen-frontend-mobile/SKILL.md",
+      "description": "Mobile view visual image generation skill."
+    },
+    {
+      "id": "brandkit",
+      "path": "packages/ui/skills/brandkit/SKILL.md",
+      "description": "Brand kit alignment and asset management skill."
+    },
+    {
+      "id": "image-to-code-skill",
+      "path": "packages/ui/skills/image-to-code-skill/SKILL.md",
+      "description": "Convert visual screenshots into clean React + Tailwind components."
+    },
+    {
+      "id": "output-skill",
+      "path": "packages/ui/skills/output-skill/SKILL.md",
+      "description": "Production output formatting and clean code structure."
+    },
+    {
+      "id": "stitch-skill",
+      "path": "packages/ui/skills/stitch-skill/SKILL.md",
+      "description": "Multi-component layout stitching and page composition."
+    },
+    {
+      "id": "gpt-tasteskill",
+      "path": "packages/ui/skills/gpt-tasteskill/SKILL.md",
+      "description": "GPT prompt engineering for taste and design guidance."
+    },
+    {
+      "id": "taste-skill-v1",
+      "path": "packages/ui/skills/taste-skill-v1/SKILL.md",
+      "description": "Taste skill v1 legacy reference."
+    },
+    {
+      "id": "design",
+      "path": "packages/ui/skills/design/SKILL.md",
+      "description": "Core UI/UX design rules, logo design, and copywriting formulas."
+    },
+    {
+      "id": "banner-design",
+      "path": "packages/ui/skills/banner-design/SKILL.md",
+      "description": "Marketing hero banner sizes and promotional graphics."
+    },
+    {
+      "id": "slides",
+      "path": "packages/ui/skills/slides/SKILL.md",
+      "description": "Interactive HTML slide presentation layouts."
     }
   ]
 }
