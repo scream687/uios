@@ -1,0 +1,16 @@
+{
+  "id": "impeccable-craftsmanship",
+  "version": "2.0.0",
+  "category": "Typography",
+  "provides": [
+    "typography.selection",
+    "typography.tracking",
+    "layout.rhythm"
+  ],
+  "requires": [
+    "brand.strategy"
+  ],
+  "priority": 95,
+  "author": "UIOS",
+  "status": "Stable"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "anti-slop-frontend",
+  "version": "2.1.0",
+  "category": "Layout",
+  "provides": [
+    "layout.audit",
+    "layout.refinement"
+  ],
+  "requires": [
+    "typography.selection",
+    "composition.analysis"
+  ],
+  "priority": 90,
+  "author": "UIOS",
+  "status": "Stable"
+}

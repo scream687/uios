@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UIOSSkillManifest",
+  "type": "object",
+  "required": ["id", "version", "category", "provides", "requires", "priority", "author", "status"],
+  "properties": {
+    "id": { "type": "string" },
+    "version": { "type": "string" },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Strategy",
+        "Audit",
+        "Generation",
+        "Composition",
+        "Typography",
+        "Layout",
+        "Color",
+        "Motion",
+        "Brand",
+        "Accessibility",
+        "Code Generation",
+        "Output",
+        "Validation",
+        "Optimization",
+        "Export",
+        "Research"
+      ]
+    },
+    "provides": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "requires": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "priority": { "type": "number" },
+    "author": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["Experimental", "Beta", "Stable", "Deprecated", "Archived"]
+    }
+  }
+}

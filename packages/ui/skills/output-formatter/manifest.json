@@ -1,0 +1,15 @@
+{
+  "id": "output-formatter",
+  "version": "1.0.0",
+  "category": "Output",
+  "provides": [
+    "output.code-generation",
+    "output.formatting"
+  ],
+  "requires": [
+    "accessibility.validation"
+  ],
+  "priority": 80,
+  "author": "UIOS",
+  "status": "Stable"
+}

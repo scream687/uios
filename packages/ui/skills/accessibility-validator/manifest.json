@@ -1,0 +1,16 @@
+{
+  "id": "accessibility-validator",
+  "version": "1.0.0",
+  "category": "Accessibility",
+  "provides": [
+    "accessibility.validation",
+    "wcag.compliance"
+  ],
+  "requires": [
+    "color.palette",
+    "typography.selection"
+  ],
+  "priority": 90,
+  "author": "UIOS",
+  "status": "Stable"
+}
