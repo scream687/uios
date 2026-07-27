@@ -121,14 +121,17 @@ export class ExternalSkillKnowledgeHydrator {
     }
 
     try {
-      const impeccablePath = path.resolve(process.cwd(), '../../packages/knowledge/external/impeccable/README.md');
+      // Probe the file actually consumed at runtime (the slop-detection engine),
+      // not an arbitrary README sentinel — so "mounted" reflects real usability.
+      const impeccablePath = path.resolve(process.cwd(), '../../packages/knowledge/external/impeccable/cli/engine/engines/regex/detect-text.mjs');
       impeccableSkillMounted = fs.existsSync(impeccablePath);
     } catch (e) {
       impeccableSkillMounted = false;
     }
 
     try {
-      const proMaxPath = path.resolve(process.cwd(), '../../packages/knowledge/external/ui-ux-pro-max-skill/README.md');
+      // Probe the search script the UupmClient actually shells out to.
+      const proMaxPath = path.resolve(process.cwd(), '../../packages/knowledge/external/ui-ux-pro-max-skill/cli/assets/scripts/search.py');
       uiUxProMaxSkillMounted = fs.existsSync(proMaxPath);
     } catch (e) {
       uiUxProMaxSkillMounted = false;

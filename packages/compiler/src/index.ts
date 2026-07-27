@@ -26,7 +26,6 @@ export * from './v4/index.js';
 export * from './v6/index.js';
 export * from './v7/index.js';
 export * from './v8/index.js';
-export * from './v9/index.js';
 export * from './v10/index.js';
 export * from './v11/index.js';
 export * from './skills/loader.js';

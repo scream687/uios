@@ -5,6 +5,10 @@
   "description": "UIOS Design Knowledge Graph, Inspiration Engine, UX Laws, and Component Genome",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "external"
+  ],
   "scripts": {
     "build": "tsc",
     "test": "node --test test/**/*.test.ts"

@@ -8,8 +8,11 @@
 import { pathToFileURL } from 'node:url';
 import { fileURLToPath } from 'node:url';
 
+// Point straight at the regex text detector — the only thing detectSlop needs.
+// The top-level barrel (detect-antipatterns.mjs) eagerly imports the CLI entry
+// and browser/visual detectors (puppeteer, cli/lib), which we don't vendor.
 const ENGINE_PATH = fileURLToPath(
-  new URL('../../external/impeccable/cli/engine/detect-antipatterns.mjs', import.meta.url),
+  new URL('../../external/impeccable/cli/engine/engines/regex/detect-text.mjs', import.meta.url),
 );
 
 export type SlopSeverity = 'critical' | 'warning' | 'advisory';
