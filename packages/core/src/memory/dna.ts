@@ -1,5 +1,14 @@
+/** Named archetypes the offline BrandDNAEngine ships; uupm can supply any label. */
+export type BuiltinArchetype =
+  | 'Linear Dark'
+  | 'Apple Minimal'
+  | 'Stripe SaaS'
+  | 'Raycast Midnight'
+  | 'Luxury Editorial';
+
 export interface BrandTokens {
-  archetype: 'Linear Dark' | 'Apple Minimal' | 'Stripe SaaS' | 'Raycast Midnight' | 'Luxury Editorial';
+  /** A descriptive label — a BuiltinArchetype offline, or a uupm style name. */
+  archetype: string;
   colors: {
     background: string;
     foreground: string;
@@ -166,6 +175,72 @@ export class BrandDNAEngine {
             durationFast: '150ms',
             durationNormal: '250ms',
           },
+        };
+
+      case 'Raycast Midnight':
+        return {
+          archetype: 'Raycast Midnight',
+          colors: {
+            background: '#0a0a0f',
+            foreground: '#e8e8f2',
+            card: 'rgba(255, 255, 255, 0.04)',
+            cardForeground: '#c6c6d6',
+            primary: '#ff6363',
+            primaryForeground: '#ffffff',
+            secondary: '#16161f',
+            accent: '#ff9d5c',
+            border: 'rgba(255, 255, 255, 0.10)',
+            ring: 'rgba(255, 99, 99, 0.5)',
+            gradientHero: 'radial-gradient(120% 90% at 50% -10%, rgba(255,99,99,0.12), transparent 55%)',
+          },
+          typography: {
+            fontFamilyHeading: 'Inter, -apple-system, sans-serif',
+            fontFamilyBody: 'Inter, sans-serif',
+            fontSizeHero: 'clamp(3rem, 6.5vw, 5.5rem)',
+            fontSizeH1: 'clamp(2.25rem, 4vw, 3.5rem)',
+            fontSizeH2: 'clamp(1.5rem, 3vw, 2.25rem)',
+            fontSizeBody: '1rem',
+            lineHeightHero: '1.02',
+          },
+          radius: { sm: '0.5rem', md: '0.625rem', lg: '0.875rem', full: '9999px' },
+          shadows: {
+            card: '0 0 0 1px rgba(255,255,255,0.06), 0 8px 30px rgba(0,0,0,0.6)',
+            glow: '0 0 40px -8px rgba(255, 99, 99, 0.35)',
+          },
+          motion: { ease: 'cubic-bezier(0.16, 1, 0.3, 1)', durationFast: '120ms', durationNormal: '260ms' },
+        };
+
+      case 'Luxury Editorial':
+        return {
+          archetype: 'Luxury Editorial',
+          colors: {
+            background: '#f4f1ea',
+            foreground: '#1c1813',
+            card: '#ffffff',
+            cardForeground: '#4a453c',
+            primary: '#b0431f',
+            primaryForeground: '#ffffff',
+            secondary: '#e9e3d6',
+            accent: '#9a7b3f',
+            border: 'rgba(28, 24, 19, 0.14)',
+            ring: 'rgba(176, 67, 31, 0.4)',
+            gradientHero: 'linear-gradient(180deg, rgba(176,67,31,0.06), transparent)',
+          },
+          typography: {
+            fontFamilyHeading: 'Georgia, "Times New Roman", serif',
+            fontFamilyBody: 'Georgia, serif',
+            fontSizeHero: 'clamp(3.5rem, 7vw, 6rem)',
+            fontSizeH1: 'clamp(2.5rem, 5vw, 4rem)',
+            fontSizeH2: 'clamp(1.75rem, 3vw, 2.5rem)',
+            fontSizeBody: '1.125rem',
+            lineHeightHero: '1.0',
+          },
+          radius: { sm: '0.125rem', md: '0.25rem', lg: '0.5rem', full: '9999px' },
+          shadows: {
+            card: '0 1px 0 rgba(28, 24, 19, 0.08), 0 12px 30px -18px rgba(28,24,19,0.3)',
+            glow: 'none',
+          },
+          motion: { ease: 'cubic-bezier(0.16, 1, 0.3, 1)', durationFast: '160ms', durationNormal: '320ms' },
         };
 
       default:

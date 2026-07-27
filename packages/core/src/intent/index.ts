@@ -1,3 +1,5 @@
+import { readDesignDirection, type Dials } from '@uios/knowledge';
+
 export interface IntentOutput {
   rawPrompt: string;
   category: 'Marketing' | 'Dashboard' | 'CRM' | 'Analytics' | 'E-commerce' | 'Portfolio' | 'Documentation';
@@ -7,6 +9,9 @@ export interface IntentOutput {
   primaryGoal: 'Conversions' | 'Data Density' | 'User Retention' | 'Brand Awareness' | 'Workflow Efficiency';
   complexity: 'High' | 'Medium' | 'Low';
   inferredFeatures: string[];
+  /** The "Design Read": inferred taste direction + dials (taste-skill). */
+  directionId: string;
+  dials: Dials;
 }
 
 export class IntentEngine {
@@ -56,6 +61,11 @@ export class IntentEngine {
     if (lower.includes('hero') || category === 'Marketing') inferredFeatures.push('Hero Section', 'Bento Grid', 'Pricing Table', 'Feature Showcase', 'Social Proof / Logos');
     if (category === 'Dashboard') inferredFeatures.push('Metrics Overview Cards', 'Data Chart / Graph', 'Recent Activity Feed', 'Data Table with Filtering', 'Quick Actions Sidebar');
     if (category === 'CRM') inferredFeatures.push('Kanban Pipeline Board', 'Customer Detail View', 'Activity Timeline', 'Lead Scoring Indicator');
+    if (category === 'E-commerce') inferredFeatures.push('Hero Section', 'Bento Grid', 'Pricing Table', 'Feature Showcase', 'Data Table with Filtering');
+    if (category === 'Portfolio') inferredFeatures.push('Hero Section', 'Feature Showcase', 'Bento Grid', 'Social Proof / Logos', 'Activity Timeline');
+    if (category === 'Documentation') inferredFeatures.push('Hero Section', 'Feature Showcase', 'Data Table with Filtering', 'Quick Actions Sidebar');
+
+    const read = readDesignDirection(userPrompt);
 
     return {
       rawPrompt: userPrompt,
@@ -66,6 +76,8 @@ export class IntentEngine {
       primaryGoal: category === 'Marketing' ? 'Conversions' : 'Workflow Efficiency',
       complexity: inferredFeatures.length > 4 ? 'High' : 'Medium',
       inferredFeatures,
+      directionId: read.direction.id,
+      dials: read.dials,
     };
   }
 }

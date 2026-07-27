@@ -10,9 +10,12 @@
   },
   "scripts": {
     "build": "tsc",
-    "watch": "tsc --watch"
+    "watch": "tsc --watch",
+    "test": "node --test test/**/*.test.ts"
   },
   "dependencies": {
+    "@uios/compiler": "1.0.0",
+    "@uios/knowledge": "1.0.0",
     "chalk": "^4.1.2",
     "commander": "^12.0.0",
     "zod": "^3.22.4"

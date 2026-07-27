@@ -10,7 +10,8 @@
     "test": "node --test test/**/*.test.ts"
   },
   "dependencies": {
-    "@uios/compiler": "file:../compiler"
+    "@uios/compiler": "file:../compiler",
+    "@uios/core": "file:../core"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",

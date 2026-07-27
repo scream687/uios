@@ -1,3 +1,7 @@
+/**
+ * @deprecated `resolve()` ignores its metadata and returns one-liner stubs.
+ * Superseded by the @uios/core emitter. Kept for reference only.
+ */
 import { ASTNodeMetadata } from '@uios/compiler';
 
 export interface AuditResult {

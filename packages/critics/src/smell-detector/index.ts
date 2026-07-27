@@ -1,3 +1,7 @@
+/**
+ * @deprecated Ignores the AST; 5 of 8 smells are hardcoded `detected:false`.
+ * Replaced by real derived checks in @uios/core validation. Reference only.
+ */
 import { DesignAST } from '@uios/compiler';
 
 export interface SmellResult {

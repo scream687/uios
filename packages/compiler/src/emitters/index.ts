@@ -1,3 +1,8 @@
+/**
+ * @deprecated Ignores the AST and returns a fixed template per target. Replaced
+ * by the real tree-walking emitter in @uios/core (packages/core/src/emit),
+ * which generates code FROM the component tree. Kept for reference only.
+ */
 import { DesignAST } from '../ast/index.js';
 import { CompiledTokens } from '../tokens/index.js';
 

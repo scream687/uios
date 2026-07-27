@@ -1,3 +1,8 @@
+/**
+ * @deprecated Hardcoded theater — `evaluate()` takes no input and returns fixed
+ * scores. Replaced by the real, derived `validate()` in @uios/core
+ * (packages/core/src/validation). Kept only for reference; not on any hot path.
+ */
 export interface PersonaVote {
   role: string;
   personaName: string;

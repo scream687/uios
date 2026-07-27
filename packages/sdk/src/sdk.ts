@@ -26,6 +26,7 @@ export function createSkillContext(prompt: string): SkillContext {
     componentType: 'Navigation',
     variant: 'Default Header',
     layout: { display: 'flex', containerWidth: 'max-w-7xl', paddingY: 'py-4', gap: 'gap-8' },
+    motion: { type: 'stagger-fade-up', delayMs: 60, durationMs: 250, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' },
     animation: { type: 'stagger-fade-up', delayMs: 60, durationMs: 250, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' },
     typography: { headingScale: 'text-6xl', bodyScale: 'text-lg' },
     accessibility: { role: 'banner', keyboardFocusable: true },
