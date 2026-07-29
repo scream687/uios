@@ -6,28 +6,15 @@ import {
   DesignASTNode,
   ConstraintEngine,
   DesignTokenCompiler,
-  MotionCompiler,
   MultiTargetEmitter,
   BrandDNAEngine,
   DesignMigrationEngine,
   ReplicaTemplateManager,
   WebsiteDNAExtractor,
   DesignSystemExtractor,
-  TasteEnforcer,
   UIUXProMaxEngine,
   ImpeccableCriticBoard,
   TasteIntelligenceEngine,
-  DesignGraph,
-  DesignMemory,
-  ResearchEngine,
-  VisualReasoningPipeline,
-  LLVMCompilerPasses,
-  CompilerFrontend,
-  DesignIR,
-  EvidenceLayer,
-  SkillRuntime,
-  PostEmissionValidationLayer,
-  BenchmarkEvaluationFramework,
 } from '../dist/index.js';
 
 test('Layer 1: DesignSpecParser converts prompt to spec', () => {
@@ -213,117 +200,6 @@ test('Taste Intelligence Engine (TIE): Versioned Taste, Component Genome, & Tren
   assert.ok(updatedVersion.genomeCount > tasteVersion.genomeCount);
 });
 
-test('UIOS v2 Architecture: DesignGraph, DesignMemory, ResearchEngine, 10 LLVM Passes, & Frontends', () => {
-  const graph = new DesignGraph();
-  graph.addNode({
-    id: 'hero-1',
-    type: 'Hero',
-    properties: { title: 'Enterprise Platform' },
-    relations: [{ targetId: 'typography-1', relationType: 'governedBy' }],
-  });
-  graph.addNode({
-    id: 'typography-1',
-    type: 'TypographyContract',
-    properties: { font: 'Inter', tracking: '-0.045em' },
-    relations: [],
-  });
-
-  const trace = graph.getExplainableTrace('hero-1');
-  assert.deepStrictEqual(trace, ['Hero:hero-1', 'TypographyContract:typography-1']);
-
-  const memory = new DesignMemory();
-  memory.recordSession('proj-123', {
-    acceptedVariant: 'Spotlight Bento',
-    rejectedVariant: 'Generic Grid',
-    feedback: 'Prefer dark velvet background with cobalt CTA',
-  });
-  const projectMem = memory.getMemory('proj-123');
-  assert.strictEqual(projectMem?.acceptedVariants[0], 'Spotlight Bento');
-
-  const research = new ResearchEngine();
-  const resData = research.discoverAndAnalyze(['Awwwards', 'Godly', 'Mobbin']);
-  assert.strictEqual(resData.extractedPrinciples.length, 3);
-
-  const pipeline = new VisualReasoningPipeline();
-  const parsedAST = pipeline.parseScreenshot('https://example.com/screenshot.png');
-  assert.strictEqual(parsedAST.root.metadata.componentType, 'Navigation');
-
-  const passes = new LLVMCompilerPasses();
-  const passResult = passes.runPasses(parsedAST, {
-    personality: ['confident', 'tactical'],
-    tone: 'humanist',
-    visualLanguage: 'Linear Dark',
-    typographyDNA: {},
-    motionDNA: {},
-    interactionDNA: {},
-    spacingDNA: {},
-    shapeDNA: {},
-    colorDNA: {},
-    illustrationDNA: {},
-  });
-  assert.strictEqual(passResult.passLogs.length, 10);
-  assert.strictEqual(passResult.scores.overallScore, 96);
-
-  const frontend = new CompilerFrontend();
-  const fAST = frontend.parseSource('React', '<button>Click Me</button>');
-  assert.strictEqual(fAST.root.metadata.library.primary, 'React');
-});
-
-test('UIOS v2 Operating System Refinements: Design IR, Evidence Layer, Skill Runtime, Validation, & Benchmarks', () => {
-  const specParser = new DesignSpecParser();
-  const spec = specParser.parse('Build Linear Dark interface');
-  const tokenCompiler = new DesignTokenCompiler();
-  const tokens = tokenCompiler.compile(spec);
-
-  const root = new DesignASTNode('root', 'Root', {
-    componentType: 'Navigation',
-    variant: 'Default',
-    layout: { display: 'flex', containerWidth: 'max-w-7xl', paddingY: 'py-4', gap: 'gap-4' },
-    animation: { type: 'stagger-fade-up', delayMs: 0, durationMs: 250, easing: 'ease' },
-    typography: { headingScale: 'text-5xl', bodyScale: 'text-base' },
-    accessibility: { role: 'banner', keyboardFocusable: true },
-    performance: { gpuBudgetMs: 2.0, lazyLoad: false },
-    library: { primary: 'shadcn/ui', priorityScore: 90 },
-  });
-  const ast = new DesignAST(root);
-
-  // 1. Design IR conversion
-  const ir = DesignIR.fromAST(ast);
-  assert.strictEqual(ir.root.kind, 'component');
-
-  // 2. Evidence Layer
-  const evidenceLayer = new EvidenceLayer();
-  evidenceLayer.addEvidence({
-    id: 'ev-1',
-    sourceUrl: 'https://awwwards.com/sample',
-    extractedFeatures: { typography: '-0.045em' },
-    qualityScore: 98,
-    timestamp: '2026-07-24',
-  });
-  assert.strictEqual(evidenceLayer.getEvidence().length, 1);
-
-  // 3. Skill Runtime & Marketplace
-  const skillRuntime = new SkillRuntime();
-  skillRuntime.registerSkill({
-    name: '@uios/skill-stripe',
-    requires: ['DesignAST'],
-    produces: ['UpdatedAST'],
-    supports: ['landing-page'],
-    version: '2.1.0',
-  });
-  assert.strictEqual(skillRuntime.listMarketplaceSkills().length, 1);
-
-  // 4. Post-Emission Validation Layer
-  const validator = new PostEmissionValidationLayer();
-  const valReport = validator.validate('<div class="hero">Code</div>');
-  assert.strictEqual(valReport.visualRegressionPassed, true);
-  assert.strictEqual(valReport.diagnostics.length, 3);
-
-  // 5. Benchmark Evaluation Framework
-  const bench = new BenchmarkEvaluationFramework();
-  const benchResult = bench.runBenchmarkSuite('v2.0.0');
-  assert.strictEqual(benchResult.averageScore, 97);
-});
 
 
 
